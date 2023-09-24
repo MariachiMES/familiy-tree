@@ -1,10 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="stylesheet" href="./styles.css" />
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>Family Tree</title>
 	</head>
-	<body></body>
+	<body>
+		<div class="birth-certificate">
+			<div class="certificate-border">
+				<div class="header">
+					<h2>Registro Nacional de las Personas</h2>
+					<h4>Republica de Guatemala</h4>
+					<h3>Registro Civil de las Personas</h3>
+					<h3>Certificado de Nacimiento</h3>
+				</div>
+				<div class="info-header">
+					<h3>
+						EL infrascrito Rigistrador Civil de las Personas del Rigistro
+						Nacional de las Personas del Municipio de Guatemala, Departamento de
+						Guatemala,
+					</h3>
+					<h3>CERTIFICA</h3>
+					<h3>
+						que con fecha <span class="dob">XXXXX</span> en la partida AAA,
+						folio BB del libro ZZZ del Registro Civil del Municipio de
+						Guatemala, Departamento de Guatemala, quedo inscrito el nacimiento
+						de:
+					</h3>
+				</div>
+				<div class="birth-certificate-body">
+					<h3 class="datos"><strong>Datos del inscrito</strong></h3>
+					<h4><span id="child-name"></span></h4>
+					<hr />
+					<h4>XX/XX/XXXX</h4>
+					<hr />
+					<h4>Guatemala, Guatemala, Guatemala Hospital</h4>
+					<hr />
+					<h3 class="datos"><strong>Datos de la madre</strong></h3>
+					<hr />
+					<h4><span id="child-mother-name"></span></h4>
+					<hr />
+					<h3 class="datos"><strong>Datos del padre</strong></h3>
+					<hr />
+					<h4><span id="child-father-name"></span></h4>
+					<hr />
+				</div>
+			</div>
+		</div>
+	</body>
 	<script src="./index.js"></script>
 </html>

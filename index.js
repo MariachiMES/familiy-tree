@@ -1,3 +1,7 @@
+const childEl = document.getElementById('child-name');
+const childMotherEl = document.getElementById('child-mother-name');
+const childFatherEl = document.getElementById('child-father-name');
+
 const maleFirstNames = [
 	'David',
 	'Eric',
@@ -13,6 +17,7 @@ let dadsName = '';
 let momsName = '';
 let maternalGrandma = '';
 let maternalGrandpa = '';
+let sponsorsName = '';
 
 const femaleFirstNames = ['Alina', 'Alana', 'Carla', 'Sarah', 'Amy'];
 
@@ -43,19 +48,45 @@ function generateFamilyName(name) {
 		lastNames.splice([randomNum], 1);
 	}
 	console.log(name);
-	generateParentsNames('male', dadsName, name);
+	uacName = name;
+	generateDadsName(dadsName, name);
+	generateMomsName(momsName, name);
 }
 
 randomGender(uacName);
 
-function generateParentsNames(gender, person, child) {
-	const idx = gender.toUpperCase() === 'MALE' ? 0 : 1;
-	const familyName = child.split(' ')[2];
+function generateDadsName(person, child) {
+	let familyName = child.split(' ')[2];
 	let randomNum;
 	for (var i = 0; i < 2; i++) {
-		randomNum = Math.floor(Math.random() * people[idx].length);
-		person += people[idx][randomNum] + ' ';
-		people[idx].splice([randomNum], 1);
+		randomNum = Math.floor(Math.random() * people[0].length);
+		person += people[0][randomNum] + ' ';
+		people[0].splice([randomNum], 1);
 	}
-	console.log(person, familyName);
+	let randomLastName = Math.floor(Math.random() * lastNames.length);
+	person += familyName + ' ' + lastNames[randomLastName];
+	dadsName = person;
+
+	console.log(person);
+}
+
+function generateMomsName(person, child) {
+	let familyName = child.split(' ')[3];
+	let randomNum;
+	for (var i = 0; i < 2; i++) {
+		randomNum = Math.floor(Math.random() * people[1].length);
+		person += people[1][randomNum] + ' ';
+		people[1].splice([randomNum], 1);
+	}
+	let randomLastName = Math.floor(Math.random() * lastNames.length);
+	person += familyName + ' ' + lastNames[randomLastName];
+	momsName = person;
+	console.log(person);
+	renderNames();
+}
+
+function renderNames() {
+	childEl.textContent = uacName;
+	childMotherEl.textContent = momsName;
+	childFatherEl.textContent = dadsName;
 }

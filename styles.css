@@ -1,0 +1,37 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	margin: 1rem;
+}
+.birth-certificate {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.datos {
+	text-align: left;
+	font-weight: 900;
+}
+
+.info-header h3 {
+	font-weight: 100;
+}
+
+.birth-certificate-body h4 {
+	font-weight: 100;
+}
+
+@media print {
+	.birth-certificate {
+		page-break-after: always;
+	}
+}
