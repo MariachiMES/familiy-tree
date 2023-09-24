@@ -1,16 +1,22 @@
 const childEl = document.getElementById('child-name');
 const childMotherEl = document.getElementById('child-mother-name');
 const childFatherEl = document.getElementById('child-father-name');
+const childBirthDateEl = document.getElementById('child-birth-date');
 
 const maleFirstNames = [
 	'David',
 	'Eric',
-	'Robert',
-	'Chuy',
+	'Roberto',
 	'Luis',
 	'Jose',
 	'Jesus',
 	'Gumecindo',
+	'Isaiah',
+	'Alejandro',
+	'Lorenzo',
+	'Enrique',
+	'Juan',
+	'Ahuitzotl',
 ];
 let uacName = '';
 let dadsName = '';
@@ -19,11 +25,48 @@ let maternalGrandma = '';
 let maternalGrandpa = '';
 let sponsorsName = '';
 
-const femaleFirstNames = ['Alina', 'Alana', 'Carla', 'Sarah', 'Amy'];
+const femaleFirstNames = [
+	'Vanessa',
+	'Maria',
+	'Carla',
+	'Amalia',
+	'Citlali',
+	'Xochitl',
+	'Lucila',
+	'Camila',
+	'Liz',
+	'Gloria',
+	'Karina',
+	'Reyna',
+	'Diamantina',
+	'Cynthia',
+	'Monserat',
+	'Julieta',
+	'Lila',
+	'Aneli',
+];
 
 const people = [maleFirstNames, femaleFirstNames];
 console.log(people[0]);
-const lastNames = ['Hernandez', 'Ortiz', 'Flores', 'Tirado', 'Sanchez'];
+const lastNames = [
+	'Hernandez',
+	'Ortiz',
+	'Flores',
+	'Lopez',
+	'Sanchez',
+	'Manzanero',
+	'Cervera',
+	'Vargas',
+	'Munoz',
+	'Martinez',
+	'Cervantes',
+	'Perez',
+	'Quintanilla',
+	'Aguero',
+	'Ramirez',
+	'Rabago',
+	'Cavazos',
+];
 
 function randomGender(person) {
 	const randomNum = Math.floor(Math.random() * people.length);
@@ -90,3 +133,18 @@ function renderNames() {
 	childMotherEl.textContent = momsName;
 	childFatherEl.textContent = dadsName;
 }
+function generateBirthday(age) {
+	const today = new Date();
+	let randomAge = Math.floor(Math.random() * 4) + age;
+	let randomMonth = Math.floor(Math.random() * 11);
+	let randomDay = Math.floor(Math.random() * 30) + 1;
+	console.log(randomAge);
+	today.setDate(randomDay);
+	today.setMonth(randomMonth);
+	today.setFullYear(today.getFullYear() - randomAge);
+	console.log(today);
+	return today;
+}
+
+const childsBirthDay = generateBirthday(13);
+childBirthDateEl.innerText = childsBirthDay.toLocaleDateString();
