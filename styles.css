@@ -154,8 +154,6 @@ ul {
 
   }
 
-  .demographics-right {}
-
   #contact {
 	max-height: 200px;
 	width: auto;
@@ -175,14 +173,6 @@ ul {
 
   .sponsor-info-left{
 	font-weight: 100;
-  }
-
-  .sponsor-info-middle{
-
-  }
-
-  .sponsor-info-right{
-
   }
 
   .utility-bill {
@@ -219,7 +209,6 @@ ul {
     justify-content: center;
     padding: 20px;
   }
-
 
   #logo {
     font-size: 32px;

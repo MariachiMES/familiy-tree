@@ -124,7 +124,6 @@ const femaleFirstNames = [
 ];
 
 const people = [maleFirstNames, femaleFirstNames];
-console.log(people[0]);
 const lastNames = [
   'Hernandez',
   'Ortiz',
@@ -150,7 +149,6 @@ function randomCity() {
 }
 function randomGender(person) {
   const randomNum = Math.floor(Math.random() * people.length);
-  console.log(randomNum, person);
   generateNames(randomNum, person);
   gender.textContent = randomNum === 0 ? 'Male' : 'Female';
 }
@@ -172,7 +170,6 @@ function generateFamilyName(name) {
     name += lastNames[randomNum] + ' ';
     lastNames.splice([randomNum], 1);
   }
-  console.log(name);
   uacName = name;
   generateDadsName(dadsName, name);
   generateMomsName(momsName, name);
@@ -191,8 +188,6 @@ function generateDadsName(person, child) {
   let randomLastName = Math.floor(Math.random() * lastNames.length);
   person += familyName + ' ' + lastNames[randomLastName];
   dadsName = person;
-
-  console.log(person);
 }
 
 function generateMomsName(person, child) {
@@ -206,7 +201,6 @@ function generateMomsName(person, child) {
   let randomLastName = Math.floor(Math.random() * lastNames.length);
   person += familyName + ' ' + lastNames[randomLastName];
   momsName = person;
-  console.log(person);
   renderNames();
 }
 
@@ -246,11 +240,11 @@ function generateBirthday(age) {
   let randomAge = Math.floor(Math.random() * 4) + age;
   let randomMonth = Math.floor(Math.random() * 11);
   let randomDay = Math.floor(Math.random() * 30) + 1;
-  console.log(randomAge);
+
   today.setDate(randomDay);
   today.setMonth(randomMonth);
   today.setFullYear(today.getFullYear() - randomAge);
-  console.log(today);
+
   return today;
 }
 
@@ -298,7 +292,7 @@ function generateMothersLastName(child) {
   let familyName = child.split(' ')[3];
   let randomLastName = Math.floor(Math.random() * lastNames.length);
   momsLastNames = familyName + ' ' + lastNames[randomLastName];
-  console.log(randomLastName);
+
   return momsLastNames;
 }
 
@@ -307,7 +301,7 @@ function generateFathersLastName(child) {
   let familyName = child.split(' ')[2];
   let randomLastName = Math.floor(Math.random() * lastNames.length);
   dadsLastNames = familyName + ' ' + lastNames[randomLastName];
-  console.log(randomLastName);
+
   return dadsLastNames;
 }
 
