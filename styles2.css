@@ -53,3 +53,26 @@ h1,h2,h3,h4 {
         page-break-before:always;
     }
 }
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}
+.demographics-container {
+    height: 200px;
+    margin: 1rem;
+    padding: 1rem;
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.demographic-header {
+
+    font-size: 20px;
+    display: flex;
+    text-align: center;
+    border-bottom: 1px solid black;
+}

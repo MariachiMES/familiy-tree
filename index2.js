@@ -285,6 +285,7 @@ const girl = new FamilyMember(
   'Female',
   'Child',
   'Espanol',
+  "",
   12
 );
 
@@ -461,6 +462,14 @@ const maternalFemale1stCousin = new FamilyMember(
   null,
   25
 );
+const femaleSpouse = new FamilyMember(
+  randomFirstNames('Female'),
+  randomLastName(),
+  randomLastName(),
+  'Female',
+  'Spouse',
+
+)
 const everyone = {
   boy,
   girl,
@@ -537,12 +546,18 @@ function randomSalary() {
   return `$${(50000 + Math.floor(Math.random() * 50000)).toString()}`
 }
 
+const demoKid = gE('demographic-name')
+const demoDob = gE('demographic-dob')
+const demoCoo = gE('demographic-coo')
+
 function getCat1Mother(){
   console.log('getting Cat 1')
+  
   const [admit, depart, arrive, j] = generateJourneyTime()
   const {boy,girl, mother, father, maternalGrandfather, maternalGrandmother} = createFamily()
   const genderArr = [boy,girl]
   const child = randomPlace(genderArr)
+  console.log(child)
   const obj = {}
   const [childLanguage, coo] = randomCountry()
   let [randomCity, idx] = randomPlace(coo.cities)
@@ -554,7 +569,7 @@ function getCat1Mother(){
   obj.language = childLanguage
   obj.coo = coo.countryName
   obj.city = randomCity
-  obj.neighborhood = neighborhood
+  obj.neighborhood = neighborhood[0]
   obj.childName = child[0].name
   obj.childFirstName = child[0].firstName
   obj.childLastName = child[0].fathersFamilyName + ' ' + child[0].mothersFamilyName
@@ -563,29 +578,33 @@ function getCat1Mother(){
   obj.sponsor = mother
   obj.mother = mother
   obj.father = father
+  obj.femaleCaregiver = maternalGrandfather
+  obj.maleCaregiver = maternalGrandmother
   obj.maternalGrandfather = maternalGrandfather
   obj.maternalGrandmother = maternalGrandmother
-  obj.id = Date.now() + Math.floor(Math.random() * 1999)
-  console.log(obj)
-  totalCaseload.push(obj)
-  const bcs = [
-    {childName : obj.childFirstName + obj.childLastName,
-  mother: obj.mother.name,
-father: obj.father.name,
-dob: obj.childDob},
-{
-  childName: obj.mother.name,
-  mother: obj.maternalGrandmother.name,
-  father: obj.maternalGrandfather.name,
-  dob: obj.mother.birthday
-}
-  ]
   obj.hobbies = randomHobbies()
-  obj.birthCertificates = bcs
   obj.sponsor.employment = randomPlace(professions)
   obj.sponsor.salary = randomSalary()
-  console.log('the sponsor is: ', obj.sponsor)
+  obj.id = Date.now() + Math.floor(Math.random() * 1999)
+  const bcs = [
+    {
+      childName : obj.childFirstName + obj.childLastName,
+      mother: obj.mother.name,
+      father: obj.father.name,
+      dob: obj.childDob},
+    {
+      childName: obj.mother.name,
+      mother: obj.maternalGrandmother.name,
+      father: obj.maternalGrandfather.name,
+      dob: obj.mother.birthday
+    }
+  ]
+  obj.birthCertificates = bcs
+  
+  totalCaseload.push(obj)
   console.log(totalCaseload)
+  renderKid(obj)
+  
 }
 
 function getCat2BMaternalAunt() {
@@ -596,6 +615,10 @@ function getCat2BMaternalAunt() {
 
 function gE(elem) {
  return document.getElementById(elem)
+}
+
+function renderKid(kid){
+renderDemographics(kid)
 }
 
 // const aNumber = gE('a-number')
@@ -637,5 +660,30 @@ function renderCases(child, idx) {
 
 
 const what = getCat1Mother()
-const why = getCat1Mother()
+
+function renderDemographics(kid) {
+
+  const bodyEl = document.getElementById('body')
+const container = document.createElement('div')
+container.classList.add('demographics-container', 'document')
+const demographics = document.createElement('div')
+demographics.innerHTML = `<div class="demographic-info">
+<div class = 'demographic-header'>Child Name:</div>
+<div id = 'demographic-name'>${kid.childName}</div>
+</div>
+<div class="demographic-info">
+<div class = 'demographic-header'>A#</div>
+</div>
+<div class="demographic-info">
+<div class = 'demographic-header'>DOB:</div>
+<div id="demographic-dob">${kid.childDob.toLocaleDateString()}</div>
+</div>
+<div class="demographic-info">
+<div class = 'demographic-header'>COO:</div>
+<div id="demographic-coo">${`Country of Origin: ${kid.coo} City: ${kid.city.cityName} Neighborhood: ${kid.neighborhood}`}</div>
+</div>`
+container.append(demographics)
+bodyEl.prepend(container)
+
+}
 
