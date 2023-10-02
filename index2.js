@@ -153,7 +153,19 @@ function randomHobbies() {
   }
   return skills;
 }
-
+function generateId() {
+  const id = {};
+  const idTypes = [
+    "Foreign Passport",
+    "State Id",
+    "Legal Permanent Resident Card",
+    "United States Passport",
+  ];
+  id.type = randomPlace(idTypes);
+  id.issued = new Date();
+  id.expires = new Date();
+  return id;
+}
 randomHobbies();
 let childLanguage;
 let childCountry;
@@ -710,7 +722,7 @@ function getCat1Mother() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 1999);
+  obj.id = Date.now() + Math.floor(Math.random() * 4536281736);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -777,7 +789,7 @@ function getCat1Father() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 1999);
+  obj.id = Date.now() + Math.floor(Math.random() * 226382716);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -835,7 +847,7 @@ function getCat2ASister() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 1999);
+  obj.id = Date.now() + Math.floor(Math.random() * 2384927849);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -893,7 +905,7 @@ function getCat2ABrother() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 1999);
+  obj.id = Date.now() + Math.floor(Math.random() * 8493728371);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -961,7 +973,7 @@ function getCat2BMaternalAunt() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 1999);
+  obj.id = Date.now() + Math.floor(Math.random() * 3372948302);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1036,7 +1048,7 @@ function getCat2BMaternalUncle() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 1999);
+  obj.id = Date.now() + Math.floor(Math.random() * 1374974073);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1108,7 +1120,7 @@ function getCat2BPaternalUncle() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 1999);
+  obj.id = Date.now() + Math.floor(Math.random() * 842490174);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1183,7 +1195,7 @@ function getCat2BPaternalAunt() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 1999);
+  obj.id = Date.now() + Math.floor(Math.random() * 9732739481);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1262,7 +1274,7 @@ function getCat3greatAunt() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 1999);
+  obj.id = Date.now() + Math.floor(Math.random() * 6482617392);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1348,7 +1360,7 @@ function getCat3greatUncle() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 1999);
+  obj.id = Date.now() + Math.floor(Math.random() * 5638257172);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1422,7 +1434,7 @@ function getCat3unrelatedFemale() {
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
   obj.sponsor.spouse = cat3MaleSpouse;
-  obj.id = Date.now() + Math.floor(Math.random() * 1999);
+  obj.id = Date.now() + Math.floor(Math.random() * 4628366381);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1486,7 +1498,7 @@ function getCat3UnrelatedMale() {
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
   obj.sponsor.spouse = cat3FemaleSpouse;
-  obj.id = Date.now() + Math.floor(Math.random() * 1999);
+  obj.id = Date.now() + Math.floor(Math.random() * 6482974829);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1626,20 +1638,34 @@ function renderDemographics(kid) {
 // const cat3unrelatedFemale = getCat3unrelatedFemale();
 // const cat3unrelatedMale = getCat3UnrelatedMale();
 
-const functionObj = {};
-const functions = [getCat1Mother];
+const functionObj = [
+  getCat1Mother,
+  getCat2ASister,
+  getCat2BMaternalAunt,
+  getCat3greatAunt,
+  getCat1Father,
+  getCat2ABrother,
+  getCat2BPaternalAunt,
+  getCat3greatUncle,
+  getCat1Mother,
+  getCat2ASister,
+  getCat2BMaternalUncle,
+  getCat3UnrelatedMale,
+  getCat1Father,
+  getCat2ABrother,
+  getCat2BPaternalUncle,
+  getCat3unrelatedFemale,
+];
 
-// function generateTonsOfCases(rounds) {
-//   let count = 1;
-//   for (var i = 0; count <= rounds; i++) {
-//     if (i > functions.length - 1) {
-//       i = 1;
-//     }
-//     functions[i];
-//     console.log("The Count is", count, functions[i]);
-//     count++;
-//   }
-//   console.log(totalCaseload);
-// }
-
-// generateTonsOfCases(20);
+function generateTonsOfCases(rounds) {
+  let count = 1;
+  for (var i = 0; count <= rounds; i++) {
+    if (i >= functionObj.length - 1) {
+      i = 1;
+    }
+    functionObj[i]();
+    count++;
+  }
+}
+console.log(generateId());
+generateTonsOfCases(32);
