@@ -1,8 +1,10 @@
-const body = document.getElementById("body");
-window.addEventListener("load", () => {
-  document.getElementById("style").href = "./styles2.css";
-});
 let totalCaseload = [];
+const idTypes = [
+  "Foreign Passport",
+  "State Id",
+  "Legal Permanent Resident Card",
+  "United States Passport",
+];
 const genders = ["Male", "Female"];
 
 const maleNames = [
@@ -32,12 +34,57 @@ const maleNames = [
 ];
 
 const femaleNames = [
-  "Mariana",
-  "Haide",
+  "Samantha",
+  "Vanessa",
   "Ruby",
   "Marisa",
   "Deloiza",
   "Melissa",
+  "Debbie",
+  "Selena",
+  "Joanna",
+  "Amalia",
+  "Cynthia",
+  "Laura",
+  "Alejandra",
+  "Kristina",
+  "Elsa",
+  "Naomi",
+  "Jaqueline",
+  "Venessa",
+  "Inez",
+  "Anita",
+  "Teresa",
+  "Imelda",
+  "Rocketa",
+  "Jana",
+  "Corina",
+  "Christina",
+  "Nina",
+  "Cecilia",
+  "Alison",
+  "Amanda",
+  "Daniela",
+  "Genevieve",
+  "Ina",
+  "Paty",
+  "Aida",
+  "Reyna",
+  "Monica",
+  "Sonja",
+  "Julieta",
+  "Julissa",
+  "Lisa",
+  "Guadalupe",
+  "Norma",
+  "Diamantina",
+  "Tanya",
+  "Sabrina",
+  "Gabriela",
+  "Iris",
+  "Pamela",
+  "Carla",
+  "Clarissa",
 ];
 
 const lastNames = [
@@ -49,6 +96,14 @@ const lastNames = [
   "Garcia",
   "Gomez",
   "Cavazos",
+  "Zepeda",
+  "Zapata",
+  "Luna",
+  "Medellin",
+  "Moreno",
+  "Lozano",
+  "Cervantes",
+  "Cardenas",
 ];
 
 const countriesOfOrigin = [
@@ -153,24 +208,31 @@ function randomHobbies() {
   }
   return skills;
 }
-function generateId() {
+
+function issueDate() {
+  const issued = new Date();
+  const randomDays = Math.floor(Math.random() * 30);
+  const randomMonths = Math.floor(Math.random() * 11);
+  const randomYears = Math.floor(2 + Math.random() * 5);
+  issued.setDate(randomDays);
+  issued.setMonth(randomMonths);
+  issued.setFullYear(issued.getFullYear() - randomYears);
+  return issued;
+}
+function expirationDate(birthday, issue) {
+  const dateOfExpiry = new Date(birthday);
+  const issued = new Date(issue);
+  dateOfExpiry.setDate(dateOfExpiry.getDate() - 1);
+  dateOfExpiry.setFullYear(issued.getFullYear() + 5);
+  return dateOfExpiry;
+}
+function generateId(birthday, issued) {
   const id = {};
-  const idTypes = [
-    "Foreign Passport",
-    "State Id",
-    "Legal Permanent Resident Card",
-    "United States Passport",
-  ];
-  id.type = randomPlace(idTypes);
-  id.issued = new Date();
-  id.expires = new Date();
+
+  id.issued = issueDate();
+  id.expires = expirationDate(birthday, issued);
   return id;
 }
-randomHobbies();
-let childLanguage;
-let childCountry;
-let childNeighborhood;
-let childCity;
 
 function randomCountry() {
   const randomIdx = Math.floor(Math.random() * countriesOfOrigin.length);
@@ -230,16 +292,23 @@ class FamilyMember {
   }
 }
 
-function generateBirthday(generation) {
+function generateBirthday(minAge) {
   const today = new Date();
   const randomDay = Math.floor(Math.random() * 30);
   const randomMonth = Math.floor(Math.random() * 12);
-  const randomAge = Math.floor(generation + Math.random() * 6);
+  const randomAge = Math.floor(minAge + Math.random() * 5);
   today.setDate(randomDay);
   today.setMonth(randomMonth);
   today.setFullYear(today.getFullYear() - randomAge);
   return today;
 }
+
+document.addEventListener("submit", (e) => {
+  e.preventDefault();
+  console.log("clicked");
+  const caseNum = document.getElementById("number");
+  generateTonsOfCases(caseNum.value);
+});
 
 function arrivalDates(journey) {
   const dateOfAdmission = new Date();
@@ -247,16 +316,6 @@ function arrivalDates(journey) {
   const dateOfArrival = new Date();
   dateOfArrival.setDate(dateOfArrival.getDate() - 2);
   dateOfDeparture.setDate(dateOfAdmission.getDate() - journey - 2);
-  console.log(
-    "length of journey: ",
-    journey,
-    "date of admission: ",
-    dateOfAdmission.toLocaleDateString(),
-    "date of Deparature: ",
-    dateOfDeparture.toLocaleDateString(),
-    "date of Arrival: ",
-    dateOfArrival.toLocaleDateString(),
-  );
   return [
     dateOfAdmission.toLocaleDateString(),
     dateOfDeparture.toLocaleDateString(),
@@ -279,8 +338,8 @@ function randomGender() {
 }
 
 function randomPhoneNumber() {
-  const randomThree = Math.floor(Math.random() * 999).toString();
-  const randomFour = Math.floor(Math.random() * 900 + 100).toString();
+  const randomThree = Math.floor(100 + Math.random() * 899).toString();
+  const randomFour = Math.floor(1000 + Math.random() * 8999).toString();
   return `(555)-${randomThree}-${randomFour}`;
 }
 
@@ -365,7 +424,7 @@ function createFamily() {
     "Child",
     "",
     "Espanol",
-    12,
+    13,
   );
 
   const girl = new FamilyMember(
@@ -376,7 +435,7 @@ function createFamily() {
     "Child",
     "Espanol",
     "",
-    12,
+    13,
   );
 
   const maleSibling = new FamilyMember(
@@ -722,7 +781,13 @@ function getCat1Mother() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 4536281736);
+  obj.sponsor.id_type = randomPlace(idTypes);
+  obj.sponsor.id_issued = issueDate();
+  obj.sponsor.id_expires = expirationDate(
+    obj.sponsor.birthday,
+    obj.sponsor.id_issued,
+  );
+  obj._id = Date.now() + Math.floor(Math.random() * 4536281736);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -789,7 +854,13 @@ function getCat1Father() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 226382716);
+  obj.sponsor.id_type = randomPlace(idTypes);
+  obj.sponsor.id_issued = issueDate();
+  obj.sponsor.id_expires = expirationDate(
+    obj.sponsor.birthday,
+    obj.sponsor.id_issued,
+  );
+  obj._id = Date.now() + Math.floor(Math.random() * 226382716);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -847,7 +918,13 @@ function getCat2ASister() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 2384927849);
+  obj.sponsor.id_type = randomPlace(idTypes);
+  obj.sponsor.id_issued = issueDate();
+  obj.sponsor.id_expires = expirationDate(
+    obj.sponsor.birthday,
+    obj.sponsor.id_issued,
+  );
+  obj._id = Date.now() + Math.floor(Math.random() * 2384927849);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -905,7 +982,13 @@ function getCat2ABrother() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 8493728371);
+  obj.sponsor.id_type = randomPlace(idTypes);
+  obj.sponsor.id_issued = issueDate();
+  obj.sponsor.id_expires = expirationDate(
+    obj.sponsor.birthday,
+    obj.sponsor.id_issued,
+  );
+  obj._id = Date.now() + Math.floor(Math.random() * 8493728371);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -973,7 +1056,13 @@ function getCat2BMaternalAunt() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 3372948302);
+  obj.sponsor.id_type = randomPlace(idTypes);
+  obj.sponsor.id_issued = issueDate();
+  obj.sponsor.id_expires = expirationDate(
+    obj.sponsor.birthday,
+    obj.sponsor.id_issued,
+  );
+  obj._id = Date.now() + Math.floor(Math.random() * 3372948302);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1048,7 +1137,13 @@ function getCat2BMaternalUncle() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 1374974073);
+  obj.sponsor.id_type = randomPlace(idTypes);
+  obj.sponsor.id_issued = issueDate();
+  obj.sponsor.id_expires = expirationDate(
+    obj.sponsor.birthday,
+    obj.sponsor.id_issued,
+  );
+  obj._id = Date.now() + Math.floor(Math.random() * 1374974073);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1120,7 +1215,13 @@ function getCat2BPaternalUncle() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 842490174);
+  obj.sponsor.id_type = randomPlace(idTypes);
+  obj.sponsor.id_issued = issueDate();
+  obj.sponsor.id_expires = expirationDate(
+    obj.sponsor.birthday,
+    obj.sponsor.id_issued,
+  );
+  obj._id = Date.now() + Math.floor(Math.random() * 842490174);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1195,7 +1296,13 @@ function getCat2BPaternalAunt() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 9732739481);
+  obj.sponsor.id_type = randomPlace(idTypes);
+  obj.sponsor.id_issued = issueDate();
+  obj.sponsor.id_expires = expirationDate(
+    obj.sponsor.birthday,
+    obj.sponsor.id_issued,
+  );
+  obj._id = Date.now() + Math.floor(Math.random() * 9732739481);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1274,7 +1381,13 @@ function getCat3greatAunt() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
-  obj.id = Date.now() + Math.floor(Math.random() * 6482617392);
+  obj.sponsor.id_type = randomPlace(idTypes);
+  obj.sponsor.id_issued = issueDate();
+  obj.sponsor.id_expires = expirationDate(
+    obj.sponsor.birthday,
+    obj.sponsor.id_issued,
+  );
+  obj._id = Date.now() + Math.floor(Math.random() * 6482617392);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1360,6 +1473,12 @@ function getCat3greatUncle() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
+  obj.sponsor.id_type = randomPlace(idTypes);
+  obj.sponsor.id_issued = issueDate();
+  obj.sponsor.id_expires = expirationDate(
+    obj.sponsor.birthday,
+    obj.sponsor.id_issued,
+  );
   obj.id = Date.now() + Math.floor(Math.random() * 5638257172);
   const bcs = [
     {
@@ -1433,8 +1552,14 @@ function getCat3unrelatedFemale() {
   obj.hobbies = randomHobbies();
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
+  obj.sponsor.id_type = randomPlace(idTypes);
+  obj.sponsor.id_issued = issueDate();
+  obj.sponsor.id_expires = expirationDate(
+    obj.sponsor.birthday,
+    obj.sponsor.id_issued,
+  );
   obj.sponsor.spouse = cat3MaleSpouse;
-  obj.id = Date.now() + Math.floor(Math.random() * 4628366381);
+  obj._id = Date.now() + Math.floor(Math.random() * 4628366381);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1498,7 +1623,13 @@ function getCat3UnrelatedMale() {
   obj.sponsor.employment = randomPlace(professions);
   obj.sponsor.salary = randomSalary();
   obj.sponsor.spouse = cat3FemaleSpouse;
-  obj.id = Date.now() + Math.floor(Math.random() * 6482974829);
+  obj.sponsor.id_type = randomPlace(idTypes);
+  obj.sponsor.id_issued = issueDate();
+  obj.sponsor.id_expires = expirationDate(
+    obj.sponsor.birthday,
+    obj.sponsor.id_issued,
+  );
+  obj._id = Date.now() + Math.floor(Math.random() * 6482974829);
   const bcs = [
     {
       childName: obj.childFirstName + obj.childLastName,
@@ -1531,7 +1662,8 @@ function gE(elem) {
 }
 
 function renderKid(kid) {
-  renderDemographics(kid);
+  // renderDemographics(kid);
+  renderToManifest(kid);
 }
 
 // const aNumber = gE('a-number')
@@ -1571,61 +1703,47 @@ function renderCases(child, idx) {
   familyRows.append(tableRow);
 }
 
-function renderDemographics(kid) {
-  const bodyEl = document.getElementById("body");
-  const container = document.createElement("div");
-  container.classList.add("demographics-container", "document");
-  const nameDemographic = document.createElement("div");
-  const dobDemographic = document.createElement("div");
-  const aNumberDemographic = document.createElement("div");
-  const cooDemographic = document.createElement("div");
-  const demographics = document.createElement("div");
-  const header = document.createElement("div");
-  header.classList.add("demographic-header");
+// function renderDemographics(kid) {
+//   const bodyEl = document.getElementById("body");
+//   const container = document.createElement("div");
+//   container.classList.add("demographics-container", "document");
+//   const nameDemographic = document.createElement("div");
+//   const dobDemographic = document.createElement("div");
+//   const aNumberDemographic = document.createElement("div");
+//   const cooDemographic = document.createElement("div");
+//   const demographics = document.createElement("div");
+//   const header = document.createElement("div");
+//   header.classList.add("demographic-header");
 
-  nameDemographic.append(header);
-  nameDemographic.innerText = `Child's Name`;
-  demographics.append(
-    nameDemographic,
-    dobDemographic,
-    aNumberDemographic,
-    cooDemographic,
-  );
-  demographics.innerHTML = `<style>
-  .demographics-container {
-    height: 200px;
-    margin: 1rem;
-    padding: 1rem;
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    border: 1px solid black;
-    border-radius: 5px;
-}
+//   nameDemographic.append(header);
+//   nameDemographic.innerText = `Child's Name`;
+//   demographics.append(
+//     nameDemographic,
+//     dobDemographic,
+//     aNumberDemographic,
+//     cooDemographic,
+//   );
 
-.demographic-header {
-
-    font-size: 20px;
-    display: flex;
-    text-align: center;
-    border-bottom: 1px solid black;
-}</style><div class="demographic-info">
-<div class = "demographic-header">Child Name:</div>
-<div id = "demographic-name">${kid.childName}</div>
-   </div>
-<div class="demographic-info">
-<div class = "demographic-header">A#</div>
-</div>
-<div class="demographic-info">
-<div class = "demographic-header">DOB:</div>
-<div id="demographic-dob">${kid.childDob.toLocaleDateString()}</div>
-</div>
-<div class="demographic-info">
-<div class = "demographic-header">COO:</div>
-<div id="demographic-coo">${`Country of Origin: ${kid.coo} City: ${kid.city.cityName} Neighborhood: ${kid.neighborhood}`}</div>
-</div>`;
-  container.append(demographics);
-  bodyEl.prepend(container);
-}
+//   const containerClass = "demographics-container";
+//   const headerClass = "demographic-header";
+//   demographics.innerHTML = `<div class="demographic-info">
+// <div class = ${headerClass}>Child Name:</div>
+// <div id = "demographic-name">${kid.childName}</div>
+//    </div>
+// <div class="demographic-info">
+// <div class = ${headerClass}>A#</div>
+// </div>
+// <div class="demographic-info">
+// <div class = ${headerClass}>DOB:</div>
+// <div id="demographic-dob">${kid.childDob.toLocaleDateString()}</div>
+// </div>
+// <div class="demographic-info">
+// <div class = ${headerClass}>COO:</div>
+// <div id="demographic-coo">${`Country of Origin: ${kid.coo} City: ${kid.city.cityName} Neighborhood: ${kid.neighborhood}`}</div>
+// </div>`;
+//   container.append(demographics);
+//   bodyEl.prepend(container);
+// }
 
 // const cat1 = getCat1Mother();
 // const cat1Dad = getCat1Father();
@@ -1657,7 +1775,210 @@ const functionObj = [
   getCat3unrelatedFemale,
 ];
 
+function renderToManifest(child) {
+  const tableBodyEl = gE("child-data");
+  const newRow = document.createElement("tr");
+  const dataArr = [
+    child.childFirstName,
+    child.childLastName,
+    child.childDob.toLocaleDateString(),
+    getAge(child.childDob),
+    child.childGender,
+    child.coo,
+    "Good",
+    "El Paso",
+    child.sponsor.phone,
+    child.sponsor.category,
+    "Script",
+  ];
+  newRow.setAttribute("data-child", child._id);
+  tableBodyEl.append(newRow);
+  newRow.addEventListener("mouseover", (e) => {
+    console.log("mouseover");
+    e.target.parentElement.style.backgroundColor = "rgba(0,0,0,0.1";
+  });
+  newRow.addEventListener("mouseout", (e) => {
+    e.target.parentElement.style.backgroundColor = "white";
+  });
+  newRow.addEventListener("click", getSingleScript);
+  dataArr.forEach((cell, idx) => {
+    const newCell = document.createElement("td");
+    newCell.textContent = cell;
+    newRow.append(newCell);
+  });
+}
+
+function getSingleScript(e) {
+  let singleCase = Number(e.target.parentElement.getAttribute("data-child"));
+  console.log(singleCase);
+  let oneCase;
+  totalCaseload.forEach((thing) => {
+    if (thing._id == singleCase) {
+      oneCase = thing;
+    }
+  });
+  console.log(oneCase);
+  renderScript(oneCase);
+}
+
+function renderScript(kidObj) {
+  showScriptModal();
+  renderDemographics(kidObj);
+}
+
+function renderDemographics(kid) {
+  const scriptHeadEl = document.getElementById("script-script");
+  scriptHeadEl.innerHTML = "";
+  scriptHeadEl.classList.add("print");
+  const cooH1 = document.createElement("h5");
+  cooH1.textContent = "Family in COO";
+  const headerDiv = document.createElement("div");
+  const demographicsDiv = document.createElement("div");
+  const femaleCaregiverDiv = document.createElement("div");
+  femaleCaregiverDiv.append(cooH1);
+  const maleCaregiverDiv = document.createElement("div");
+  headerDiv.classList.add("demographics-header");
+  headerDiv.appendChild(demographicsDiv);
+  const ulEl = document.createElement("ul");
+  const fcgUl = document.createElement("ul");
+  const mcgUl = document.createElement("ul");
+  headerDiv.appendChild(femaleCaregiverDiv);
+  headerDiv.appendChild(maleCaregiverDiv);
+  demographicsDiv.classList.add("header-info");
+  femaleCaregiverDiv.classList.add("header-info");
+  maleCaregiverDiv.classList.add("header-info");
+  femaleCaregiverDiv.append(fcgUl);
+  maleCaregiverDiv.append(mcgUl);
+  demographicsDiv.append(ulEl);
+  const text = {
+    "Child's Name": kid.childName,
+    DOB: kid.childDob.toLocaleDateString(),
+    Age: getAge(kid.childDob),
+    Gender: kid.childGender,
+    COO: kid.coo,
+    City: kid.city.cityName,
+    Neighborhood: kid.neighborhood,
+    "Date of departure from COO": kid.departDate,
+    "Length of Journey": `${kid.journey} days`,
+    "Date of Arrival to US": kid.arrivalDate,
+    "Date of Admission": kid.admitDate,
+    Debt: "None",
+    "Reason for Travel to US": "For a better future and education.",
+    "Port of Entry": "El Paso, TX",
+    "Date last Attended School/Grade completed": "",
+    Hobbies: kid.hobbies,
+    "Religious Affiliation": "Catholic",
+    "Primary Language": kid.language,
+  };
+  const femaleCaregiver = {
+    Name: kid.femaleCaregiver.name,
+    "Date of Birth": kid.femaleCaregiver.birthday.toLocaleDateString(),
+    "Phone Number": kid.femaleCaregiver.phone,
+    Address: `${kid.city.cityName}, ${kid.neighborhood}, ${kid.coo}`,
+    "Relationship To Sponsor": "",
+    "Relationship To Child": kid.femaleCaregiver.relationship,
+  };
+
+  const maleCaregiver = {
+    Name: kid.maleCaregiver.name,
+    "Date of Birth": kid.maleCaregiver.birthday.toLocaleDateString(),
+    "Phone Number": kid.maleCaregiver.phone,
+    Address: `${kid.city.cityName}, ${kid.neighborhood}, ${kid.coo}`,
+    "Relationship To Sponsor": "",
+    "Relationship To Child": kid.maleCaregiver.relationship,
+  };
+  for (const child in text) {
+    const liEl = document.createElement("li");
+    liEl.style = "list-style: none";
+    liEl.textContent = `${child}: ${text[child]}`;
+    ulEl.append(liEl);
+  }
+  for (const child in femaleCaregiver) {
+    const liEl = document.createElement("li");
+    liEl.style = "list-style: none";
+    liEl.textContent = `${child}: ${femaleCaregiver[child]}`;
+    fcgUl.append(liEl);
+  }
+  for (const child in maleCaregiver) {
+    const liEl = document.createElement("li");
+    liEl.style = "list-style: none";
+    liEl.textContent = `${child}: ${maleCaregiver[child]}`;
+    fcgUl.append(liEl);
+  }
+
+  scriptHeadEl.append(headerDiv);
+  renderSponsorInfo(kid);
+}
+function renderSponsorInfo(kid) {
+  console.log("rendering sponsor info here");
+  const scriptHeadEl = document.getElementById("script-script");
+  const sponsorPage = document.createElement("div");
+  sponsorPage.classList.add("document");
+  const sponsorH1 = document.createElement("h3");
+  sponsorH1.textContent = "Sponsor Information";
+  sponsorPage.append(sponsorH1);
+  scriptHeadEl.append(sponsorPage);
+}
+function renderBirthCertificates(child) {
+  const sections = [
+    {
+      title: "birth certificate container",
+      classes: "document",
+    },
+    {
+      title: "warning watermark",
+      classes: "warning",
+      html: `<h1>TRAINING ONLY</h1>`,
+    },
+    {
+      title: "borderbox",
+      classes: "bc-border",
+    },
+    {
+      title: "birth certificate header",
+      classes: "bc-header",
+      html: `<h2>Registro Nacional de las Personas</h2>
+      <h4>Republica de Guatemala</h4>
+      <h3>Registro Civil de las Personas</h3>
+      <h3>Certificado de Nacimiento</h3>`,
+    },
+    {
+      title: "birth certificate info header",
+      classes: "bc-info-header",
+      html: ` <h3>
+              El infrascrito Rigistrador Civil de las Personas del Rigistro
+              Nacional de las Personas del Municipio de Guatemala, Departamento
+              de Guatemala,
+            </h3>
+            <h3>CERTIFICA</h3>
+            <h3>
+              que con fecha ****BC DATE**** en la partida AAA, folio BB del
+              libro ZZZ del Registro Civil del Municipio de Guatemala,
+              Departamento de Guatemala, quedo inscrito el nacimiento de:
+            </h3>`,
+    },
+    {
+      title: "birth certificate body",
+      classes: "bc-body",
+    },
+  ];
+}
+
+function getAge(dob) {
+  var dob = new Date(dob);
+  var month_diff = Date.now() - dob.getTime();
+
+  var age_dt = new Date(month_diff);
+
+  var year = age_dt.getUTCFullYear();
+
+  var age = Math.abs(year - 1970);
+
+  return age;
+}
 function generateTonsOfCases(rounds) {
+  const table = document.getElementById("child-data");
+  table.innerHTML = "";
   let count = 1;
   for (var i = 0; count <= rounds; i++) {
     if (i >= functionObj.length - 1) {
@@ -1667,5 +1988,16 @@ function generateTonsOfCases(rounds) {
     count++;
   }
 }
-console.log(generateId());
-generateTonsOfCases(32);
+
+const closeScriptBtn = document.getElementById("close-script");
+const scriptEl = document.getElementById("script");
+closeScriptBtn.addEventListener("click", hideScriptModal);
+function hideScriptModal() {
+  scriptEl.classList.remove("active");
+}
+
+const openScriptBtn = document.getElementById("open-script");
+openScriptBtn.addEventListener("click", showScriptModal);
+function showScriptModal() {
+  scriptEl.classList.add("active");
+}
