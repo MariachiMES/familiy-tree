@@ -1,100 +1,130 @@
 body > form {
-  margin: 30px;
+    margin: 30px;
 }
 
 .script {
-  background-color: white;
-  top: 0;
-  left: 0;
-  right: 0;
-  position: absolute;
-  display: none;
+    background-color: white;
+    top: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    display: none;
 }
 
 .script-body {
-  position: relative;
+    position: relative;
 }
 
 .active {
-  display: block;
+    display: block;
 }
 
 .header-info {
-  margin: 1rem;
-  margin-bottom: 3rem;
+    margin: 1rem;
+    margin-bottom: 3rem;
 }
 #script-head {
-  padding: 1rem;
-  justify-content: flex-end;
-  width: 100vw;
-  position: fixed;
-  z-index: 999;
+    padding: 1rem;
+    justify-content: flex-end;
+    width: 100vw;
+    position: fixed;
+    z-index: 999;
 }
 .close-script {
-  position: sticky;
-  z-index: 998;
+    position: sticky;
+    z-index: 998;
 }
 #script-script {
-  margin-top: 100px;
-  margin-left: 40px;
+    margin-top: 100px;
+    margin-left: 40px;
 }
 .warning {
-  position: absolute;
-  font-size: 100px;
-  font-weight: 900;
-  color: rgba(255, 0, 0, 0.4);
+    position: absolute;
+    font-size: 100px;
+    font-weight: 900;
+    color: rgba(255, 0, 0, 0.4);
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .bc {
-  text-align: center;
-  border: 1px solid black;
-  margin: 1rem;
-  padding: 1rem;
-  height: 100%;
+    text-align: center;
+    border: 1px solid black;
+    margin: 1rem;
+    padding: 1rem;
+    height: 100%;
 }
 h1,
 h2,
 h3,
 h4 {
-  font-weight: 100;
-  margin: 1rem;
+    font-weight: 100;
+    margin: 1rem;
 }
 
 .datos {
-  text-align: left;
+    text-align: left;
 }
 
 @media print {
-  .document {
-    page-break-before: always;
-  }
+    .document {
+        page-break-before: always;
+    }
 }
 
 @media print {
-  .no-print {
-    display: none;
-    font-size: 12px;
-  }
-  .print {
-    display: block;
-  }
+    .no-print {
+        display: none;
+        font-size: 12px;
+    }
+    .print {
+        display: block;
+    }
 }
 
 .demographics-header {
-  font-size: 12px;
-  display: block;
-  border-bottom: 1px solid black;
-  width: 90vw;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 1rem;
+    font-size: 12px;
+    display: block;
+    border-bottom: 1px solid black;
+    width: 90vw;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 1rem;
 }
 
 li {
-  margin: 0;
-  font-weight: 100;
+    margin: 0;
+    font-weight: 100;
+}
+
+.sponsor-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border: 1px solid black;
+    padding: 1rem;
+    font-size: 12px;
+    margin: 1rem;
+    text-align: center;
+
+    /* grid-template-areas:
+        'sponsorname occupation acgname'
+        'sponsordob schedule acgdob'
+        'sponsorrelationship salary acgrelationship'
+        'face2face floorplan reltosponsor'
+        'sponsorphone blank acgphone'
+        'sponsoraddress blank acgaddress'
+        'blank additionalinfo blank'; */
+}
+
+.sponsor-cell {
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+.sponsorh5 {
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0;
 }
