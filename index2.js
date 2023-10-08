@@ -2299,8 +2299,15 @@ function renderDemographics(kid) {
     }
     for (const child in text) {
         const liEl = document.createElement('li')
+        const keyEl =
+            document.createElement('strong')
+        const valueEl =
+            document.createElement('p')
+
+        keyEl.innerHTML = child
+        valueEl.innerHTML = text[child]
         liEl.style = 'list-style: none'
-        liEl.textContent = `${child}: ${text[child]}`
+        liEl.append(keyEl, ' : ', valueEl)
         ulEl.append(liEl)
     }
     for (const child in femaleCaregiver) {
@@ -2385,9 +2392,15 @@ function renderSponsorInfo(kid) {
     }
     scriptHeadEl.append(sponsorPage)
     scriptHeadEl.append(sponsorBox)
+    renderBirthCertificates(kid)
 }
 function renderBirthCertificates(child) {
-    const sections = [
+    child.generada_desda_la_app = appGenerated()
+
+    const yesterday = new Date()
+    yesterday.setDate(yesterday.getDate() - 1)
+
+    const bcSections = [
         {
             title: 'birth certificate container',
             classes: 'document'
@@ -2405,7 +2418,7 @@ function renderBirthCertificates(child) {
             title: 'birth certificate header',
             classes: 'bc-header',
             html: `<h2>Registro Nacional de las Personas</h2>
-      <h4>Republica de Guatemala</h4>
+      <h4>Republica de ${child.coo}</h4>
       <h3>Registro Civil de las Personas</h3>
       <h3>Certificado de Nacimiento</h3>`
         },
@@ -2414,14 +2427,20 @@ function renderBirthCertificates(child) {
             classes: 'bc-info-header',
             html: ` <h3>
               El infrascrito Rigistrador Civil de las Personas del Rigistro
-              Nacional de las Personas del Municipio de Guatemala, Departamento
-              de Guatemala,
+              Nacional de las Personas del Municipio de ${
+                  child.coo
+              }, Departamento
+              de ${child.coo},
             </h3>
             <h3>CERTIFICA</h3>
             <h3>
-              que con fecha ****BC DATE**** en la partida AAA, folio BB del
-              libro ZZZ del Registro Civil del Municipio de Guatemala,
-              Departamento de Guatemala, quedo inscrito el nacimiento de:
+              que con fecha ${yesterday.toLocaleDateString()} en la partida AAA, folio BB del
+              libro ZZZ del Registro Civil del Municipio de ${
+                  child.coo
+              },
+              Departamento de ${
+                  child.coo
+              }, quedo inscrito el nacimiento de:
             </h3>`
         },
         {
@@ -2429,6 +2448,106 @@ function renderBirthCertificates(child) {
             classes: 'bc-body'
         }
     ]
+    const scriptHeadEl = document.getElementById(
+        'script-script'
+    )
+    const bcs = child.birthCertificates
+    const bcContainer =
+        document.createElement('div')
+    bcs.forEach((bc) => {
+        const bcTitle =
+            document.createElement('h1')
+        bcTitle.classList.add('bc-title')
+        bcTitle.textContent = `${bc.relationship}'s Birth Certificate`
+        const bcHeader =
+            document.createElement('div')
+        bcHeader.innerHTML = bcSections[3].html
+        bcHeader.classList.add('bc-header')
+        const bcInfo =
+            document.createElement('div')
+        bcInfo.innerHTML = bcSections[4].html
+        bcInfo.classList.add('bc-info')
+        const birthCert =
+            document.createElement('div')
+        const inscrito =
+            document.createElement('div')
+        inscrito.classList.add('inscrito')
+        const inscritoTitle =
+            document.createElement('strong')
+        inscritoTitle.textContent =
+            'Datos del Inscrito'
+        const childName =
+            document.createElement('h3')
+        childName.textContent = bc.childName
+        const childDob =
+            document.createElement('h3')
+        childDob.textContent =
+            bc.dob.toLocaleDateString()
+        const childPlaceOfBirth =
+            document.createElement('h4')
+        childPlaceOfBirth.textContent = `${child.neighborhood}, ${child.city.cityName}, ${child.coo}`
+        const horizontalRule =
+            document.createElement('hr')
+        inscrito.append(
+            inscritoTitle,
+            childName,
+            childDob,
+            childPlaceOfBirth,
+            horizontalRule
+        )
+        const datoDeMadre =
+            document.createElement('div')
+        datoDeMadre.classList.add('inscrito')
+        const datoDeMadreTitle =
+            document.createElement('strong')
+        datoDeMadreTitle.textContent =
+            'Datos de la Madre'
+        const madreName =
+            document.createElement('h3')
+        madreName.textContent = bc.mother
+        const madreDob =
+            document.createElement('h3')
+        const madreHr =
+            document.createElement('hr')
+        datoDeMadre.append(
+            datoDeMadreTitle,
+            madreName,
+            madreHr
+        )
+        const datoDePadre =
+            document.createElement('div')
+        datoDePadre.classList.add('inscrito')
+        const datoDePadreTitle =
+            document.createElement('strong')
+        datoDePadreTitle.textContent =
+            'Datos del Padre'
+        const padreName =
+            document.createElement('h3')
+        padreName.textContent = bc.father
+        const padreHr =
+            document.createElement('hr')
+        datoDeMadre.append(
+            datoDePadreTitle,
+            padreName,
+            padreHr
+        )
+        const generada =
+            document.createElement('h4')
+        generada.textContent =
+            child.generada_desda_la_app
+        birthCert.classList.add('bc', 'document')
+        birthCert.append(
+            bcTitle,
+            bcHeader,
+            bcInfo,
+            inscrito,
+            datoDeMadre,
+            datoDePadre,
+            generada
+        )
+        bcContainer.append(birthCert)
+    })
+    scriptHeadEl.append(bcContainer)
 }
 function getAge(dob) {
     var dob = new Date(dob)
@@ -2442,7 +2561,71 @@ function getAge(dob) {
 
     return age
 }
+function appGenerated() {
+    const d = Math.floor(Math.random() * 100)
+    const app =
+        d > 50 ? 'Generada Desde La App' : ''
+    return app
+}
 function generateTonsOfCases(rounds) {
+    const letters = [
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z'
+    ]
+
+    const numCases =
+        document.getElementById('number')
+    const startingA = document.getElementById(
+        'starting-a-number'
+    )
+    if (
+        numCases.value == '' ||
+        typeof Number(numCases) != 'number'
+    ) {
+        alert(
+            'Specify, some number of cases, please \n -david'
+        )
+        return
+    }
+    if (startingA.value.length !== 9) {
+        alert(
+            'this A# looks suuuuuuuuuuuuuuuuuuuuuper sus.  just saying. \n -david'
+        )
+        return
+    }
+    if (totalCaseload.length > 0) {
+        const deleteCases = confirm(
+            'ARE YOU SURE YOU WANT TO DELETE ALL THIS INFORMATION AND GENERATE NEW CASES??!!?!?!?! CLICK OK TO DELETE OLD CASES AND GENERATE NEW CASES\n\n love, \n david'
+        )
+        if (!deleteCases) {
+            return
+        }
+    }
+    totalCaseload = []
     const table =
         document.getElementById('child-data')
     table.innerHTML = ''
