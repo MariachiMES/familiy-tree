@@ -231,9 +231,6 @@ function randomHobbies() {
         )
         skills += hobbies[randomIdx]
         if (i != 1) {
-            console.log(
-                skills.charAt(0).toUpperCase()
-            )
             skills.charAt(0)
             skills += ' & '
         } else {
@@ -291,11 +288,6 @@ function randomCountry() {
 
 function randomLanguage(country) {
     let spokenLanguage = 'Espanol'
-    console.log(
-        country.languages,
-        country.languages.length
-    )
-
     if (country.languages.length > 1) {
         const languageIdx = Math.floor(
             Math.random() *
@@ -306,7 +298,6 @@ function randomLanguage(country) {
             d > 60
                 ? country.languages[languageIdx]
                 : 'Espanol'
-        console.log(spokenLanguage)
     }
 
     return spokenLanguage
@@ -372,7 +363,6 @@ const manifestBtn = document.getElementById(
 )
 manifestBtn.addEventListener('click', (e) => {
     e.preventDefault()
-    console.log('clicked')
     const caseNum =
         document.getElementById('number')
     generateTonsOfCases(caseNum.value)
@@ -846,7 +836,7 @@ function getCat1Mother() {
     } = createFamily()
     const genderArr = [boy, girl]
     const child = randomPlace(genderArr)
-    console.log(child)
+
     const obj = {}
     const [childLanguage, coo] = randomCountry()
     let [randomCity, idx] = randomPlace(
@@ -918,13 +908,11 @@ function getCat1Mother() {
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
-    console.log(totalCaseload)
+
     renderKid(obj)
 }
 
 function getCat1Father() {
-    console.log('getting Cat 1 Father')
-
     const [admit, depart, arrive, j] =
         generateJourneyTime()
     const {
@@ -937,7 +925,6 @@ function getCat1Father() {
     } = createFamily()
     const genderArr = [boy, girl]
     const child = randomPlace(genderArr)
-    console.log(child)
     const obj = {}
     const [childLanguage, coo] = randomCountry()
     let [randomCity, idx] = randomPlace(
@@ -1009,13 +996,11 @@ function getCat1Father() {
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
-    console.log(totalCaseload)
+
     renderKid(obj)
 }
 
 function getCat2ASister() {
-    console.log('getting Cat 2A Sister')
-
     const [admit, depart, arrive, j] =
         generateJourneyTime()
     const {
@@ -1028,7 +1013,6 @@ function getCat2ASister() {
     } = createFamily()
     const genderArr = [boy, girl]
     const child = randomPlace(genderArr)
-    console.log(child)
     const obj = {}
     const [childLanguage, coo] = randomCountry()
     let [randomCity, idx] = randomPlace(
@@ -1103,13 +1087,10 @@ function getCat2ASister() {
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
-    console.log(totalCaseload)
     renderKid(obj)
 }
 
 function getCat2ABrother() {
-    console.log('getting Cat 2A Bother')
-
     const [admit, depart, arrive, j] =
         generateJourneyTime()
     const {
@@ -1122,7 +1103,6 @@ function getCat2ABrother() {
     } = createFamily()
     const genderArr = [boy, girl]
     const child = randomPlace(genderArr)
-    console.log(child)
     const obj = {}
     const [childLanguage, coo] = randomCountry()
     let [randomCity, idx] = randomPlace(
@@ -1197,13 +1177,10 @@ function getCat2ABrother() {
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
-    console.log(totalCaseload)
     renderKid(obj)
 }
 
 function getCat2BMaternalAunt() {
-    console.log('getting Cat 2B Maternal Aunt')
-
     const [admit, depart, arrive, j] =
         generateJourneyTime()
     const {
@@ -1218,7 +1195,6 @@ function getCat2BMaternalAunt() {
     } = createFamily()
     const genderArr = [boy, girl]
     const child = randomPlace(genderArr)
-    console.log(child)
     const obj = {}
     const [childLanguage, coo] = randomCountry()
     let [randomCity, idx] = randomPlace(
@@ -1302,13 +1278,10 @@ function getCat2BMaternalAunt() {
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
-    console.log(totalCaseload)
     renderKid(obj)
 }
 
 function getCat2BMaternalUncle() {
-    console.log('getting Cat 2B Maternal Uncle')
-
     const [admit, depart, arrive, j] =
         generateJourneyTime()
     const {
@@ -1323,7 +1296,6 @@ function getCat2BMaternalUncle() {
     } = createFamily()
     const genderArr = [boy, girl]
     const child = randomPlace(genderArr)
-    console.log(child)
     const obj = {}
     const [childLanguage, coo] = randomCountry()
     let [randomCity, idx] = randomPlace(
@@ -1404,13 +1376,10 @@ function getCat2BMaternalUncle() {
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
-    console.log(totalCaseload)
     renderKid(obj)
 }
 
 function getCat2BPaternalUncle() {
-    console.log('getting Cat 2B Paternal Uncle')
-
     const [admit, depart, arrive, j] =
         generateJourneyTime()
     const {
@@ -1425,7 +1394,6 @@ function getCat2BPaternalUncle() {
     } = createFamily()
     const genderArr = [boy, girl]
     const child = randomPlace(genderArr)
-    console.log(child)
     const obj = {}
     const [childLanguage, coo] = randomCountry()
     let [randomCity, idx] = randomPlace(
@@ -1509,13 +1477,10 @@ function getCat2BPaternalUncle() {
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
-    console.log(totalCaseload)
     renderKid(obj)
 }
 
 function getCat2BPaternalAunt() {
-    console.log('getting Cat 2B Paternal Uncle')
-
     const [admit, depart, arrive, j] =
         generateJourneyTime()
     const {
@@ -1530,7 +1495,6 @@ function getCat2BPaternalAunt() {
     } = createFamily()
     const genderArr = [boy, girl]
     const child = randomPlace(genderArr)
-    console.log(child)
     const obj = {}
     const [childLanguage, coo] = randomCountry()
     let [randomCity, idx] = randomPlace(
@@ -1614,15 +1578,10 @@ function getCat2BPaternalAunt() {
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
-    console.log(totalCaseload)
     renderKid(obj)
 }
 
 function getCat3greatAunt() {
-    console.log(
-        'getting Cat 3 Paternal Great Aunt'
-    )
-
     const [admit, depart, arrive, j] =
         generateJourneyTime()
     const {
@@ -1639,7 +1598,6 @@ function getCat3greatAunt() {
     } = createFamily()
     const genderArr = [boy, girl]
     const child = randomPlace(genderArr)
-    console.log(child)
     const obj = {}
     const [childLanguage, coo] = randomCountry()
     let [randomCity, idx] = randomPlace(
@@ -1737,15 +1695,10 @@ function getCat3greatAunt() {
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
-    console.log(totalCaseload)
     renderKid(obj)
 }
 
 function getCat3greatUncle() {
-    console.log(
-        'getting Cat 3 Paternal Great Uncle'
-    )
-
     const [admit, depart, arrive, j] =
         generateJourneyTime()
     const {
@@ -1762,7 +1715,6 @@ function getCat3greatUncle() {
     } = createFamily()
     const genderArr = [boy, girl]
     const child = randomPlace(genderArr)
-    console.log(child)
     const obj = {}
     const [childLanguage, coo] = randomCountry()
     let [randomCity, idx] = randomPlace(
@@ -1860,13 +1812,10 @@ function getCat3greatUncle() {
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
-    console.log(totalCaseload)
     renderKid(obj)
 }
 
 function getCat3unrelatedFemale() {
-    console.log('getting Cat 3 Unrelated Female')
-
     const [admit, depart, arrive, j] =
         generateJourneyTime()
     const {
@@ -1879,7 +1828,6 @@ function getCat3unrelatedFemale() {
     } = createFamily()
     const genderArr = [boy, girl]
     const child = randomPlace(genderArr)
-    console.log(child)
     const obj = {}
     const [childLanguage, coo] = randomCountry()
     let [randomCity, idx] = randomPlace(
@@ -1962,13 +1910,10 @@ function getCat3unrelatedFemale() {
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
-    console.log(totalCaseload)
     renderKid(obj)
 }
 
 function getCat3UnrelatedMale() {
-    console.log('getting Cat 3 Unrelated Male')
-
     const [admit, depart, arrive, j] =
         generateJourneyTime()
     const {
@@ -1981,7 +1926,6 @@ function getCat3UnrelatedMale() {
     } = createFamily()
     const genderArr = [boy, girl]
     const child = randomPlace(genderArr)
-    console.log(child)
     const obj = {}
     const [childLanguage, coo] = randomCountry()
     let [randomCity, idx] = randomPlace(
@@ -2065,7 +2009,6 @@ function getCat3UnrelatedMale() {
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
-    console.log(totalCaseload)
     renderKid(obj)
 }
 
@@ -2091,7 +2034,16 @@ function createCaseload(rounds) {
 }
 
 function renderCases(child, idx) {
-    console.log(child)
+    let aNumber = document.getElementById(
+        'starting-a-number'
+    ).value
+    if (
+        typeof aNumber !== Number ||
+        aNumber.length !== 9
+    ) {
+        alert('Invalid A Number')
+        return
+    }
     const tableRow = document.createElement('tr')
     const kidName = document.createElement('td')
     const kidMom = document.createElement('td')
@@ -2188,10 +2140,21 @@ const functionObj = [
     getCat3unrelatedFemale
 ]
 
+const excelBtn = document.getElementById(
+    'table-to-excel'
+)
+
 function renderToManifest(child) {
+    excelBtn.classList.remove('hide')
+    let aNumber = document.getElementById(
+        'starting-a-number'
+    )
+    aNumber = Number(aNumber.value)
     const tableBodyEl = gE('child-data')
     const newRow = document.createElement('tr')
+
     const dataArr = [
+        aNumber,
         child.childFirstName,
         child.childLastName,
         child.childDob.toLocaleDateString(),
@@ -2201,8 +2164,7 @@ function renderToManifest(child) {
         'Good',
         'El Paso',
         child.sponsor.phone,
-        child.sponsor.category,
-        'Script'
+        child.sponsor.category
     ]
     newRow.setAttribute('data-child', child._id)
     tableBodyEl.append(newRow)
@@ -2224,6 +2186,8 @@ function renderToManifest(child) {
             document.createElement('td')
         newCell.textContent = cell
         newRow.append(newCell)
+        newRow.childNodes[0].textContent =
+            aNumber + totalCaseload.length - 1
     })
 }
 
@@ -2233,13 +2197,15 @@ function getSingleScript(e) {
             'data-child'
         )
     )
-    console.log(singleCase)
     let oneCase
     totalCaseload.forEach((thing) => {
         if (thing._id == singleCase) {
             oneCase = thing
         }
     })
+
+    oneCase.a_number =
+        e.target.parentElement.childNodes[0].textContent
     console.log(oneCase)
     renderScript(oneCase)
 }
@@ -2250,6 +2216,7 @@ function renderScript(kidObj) {
 }
 
 function renderDemographics(kid) {
+    document.title = scriptName(kid.a_number)
     const scriptHeadEl = document.getElementById(
         'script-script'
     )
@@ -2284,6 +2251,7 @@ function renderDemographics(kid) {
     const text = {
         "Child's Name": kid.childName,
         DOB: kid.childDob.toLocaleDateString(),
+        'A#': kid.a_number,
         Age: getAge(kid.childDob),
         Gender: kid.childGender,
         COO: kid.coo,
@@ -2355,7 +2323,6 @@ function acgAge(kid) {
     console.log(kid.acg.birthday)
 }
 function renderSponsorInfo(kid) {
-    console.log('rendering sponsor info here')
     const scriptHeadEl = document.getElementById(
         'script-script'
     )
@@ -2487,6 +2454,7 @@ function generateTonsOfCases(rounds) {
         functionObj[i]()
         count++
     }
+    console.log(totalCaseload)
 }
 
 const closeScriptBtn = document.getElementById(
@@ -2499,8 +2467,12 @@ closeScriptBtn.addEventListener(
 )
 function hideScriptModal() {
     scriptEl.classList.remove('active')
+    document.title = 'Family Tree'
 }
-
 function showScriptModal() {
     scriptEl.classList.add('active')
+}
+
+function scriptName(aNumber) {
+    return `${aNumber}_Mock_Script`
 }

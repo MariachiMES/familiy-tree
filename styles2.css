@@ -11,6 +11,9 @@ body > form {
     display: none;
 }
 
+.hide {
+    display: none;
+}
 .script-body {
     position: relative;
 }

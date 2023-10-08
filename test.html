@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="./styles2.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FAMILY TREE</title>
+
+
+
+    <title>Family Tree</title>
   </head>
   <body id="body">
       <form class="document form">
@@ -18,18 +21,28 @@
               placeholder="Number of Cases"
               id="number"
             />
+            <label for ='starting'>Starting A-Number</label>
+            <input type="u-half-width"
+            placeholder="A#"
+            id = 'starting-a-number'
+            >
+
+
           </div>
          
         <input id = 'manifest-button' class="button-primary" type="submit" value="Generate" />
+        <br/>
+        <button class = 'hide' type = 'button' id = 'table-to-excel'>Export to Excel </button>
       </form>
 <div class="table-container no-print">
-  <table id="table">
+  <table id="table" data-table = '1'>
     <thead></thead>
     <tbody id="family-rows no-print"></tbody>
   </table>
   <table class="u-full-width " id="manifest">
     <thead>
       <tr>
+        <th>A-Number</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>DOB</th>
@@ -40,7 +53,6 @@
         <th>Apprehension</th>
         <th>Contact</th>
         <th>Category</th>
-        <th>Script</th>
       </tr>
     </thead>
     <tbody id="child-data">
@@ -48,6 +60,14 @@
     </tbody>
   </table>
 </div>
+<button class = 'hide'type = 'button' id ='to-json'>JSON</button>
+<button class = 'hide'type = 'button ' id ='to-csv'>CSV</button>
+<button class = 'hide' type = 'button' id = 'to-pdf'>PDF</button>
+<script src = './excel.js'>  
+
+  </script>
+
+
 
     <!--DEMOGRAPHICS-->
 
@@ -106,4 +126,6 @@
     </div>
   </body>
   <script src="./index2.js" defer></script>
+
+
 </html>
