@@ -127,7 +127,7 @@ function generateBirthday(minAge) {
         Math.random() * 12
     )
     const randomAge = Math.floor(
-        minAge + Math.random() * 5
+        minAge + Math.random() * 4
     )
     today.setDate(randomDay)
     today.setMonth(randomMonth)
@@ -258,10 +258,6 @@ function randomSalary() {
     ).toString()}`
 }
 
-const demoKid = gE('demographic-name')
-const demoDob = gE('demographic-dob')
-const demoCoo = gE('demographic-coo')
-
 function createFamily() {
     const boy = new FamilyMember(
         randomFirstNames('Male'),
@@ -271,7 +267,7 @@ function createFamily() {
         'Child',
         'Child',
         'Espanol',
-        13
+        14
     )
 
     const girl = new FamilyMember(
@@ -282,7 +278,7 @@ function createFamily() {
         'Child',
         'Child',
         'Espanol',
-        13
+        14
     )
 
     const maleSibling = new FamilyMember(
@@ -950,7 +946,7 @@ function getCat2ABrother() {
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.sponsor.birthday,
-            relationship: obj.sponsor.relationsihp
+            relationship: obj.sponsor.relationship
         }
     ]
     obj.birthCertificates = bcs
@@ -1137,19 +1133,22 @@ function getCat2BMaternalUncle() {
                 obj.childLastName,
             mother: obj.mother.name,
             father: obj.father.name,
-            dob: obj.childDob
+            dob: obj.childDob,
+            relationship: 'Child'
         },
         {
             childName: obj.mother.name,
             mother: obj.femaleGrandparent.name,
             father: obj.maleGrandparent.name,
-            dob: obj.mother.birthday
+            dob: obj.mother.birthday,
+            relationship: obj.mother.relationship
         },
         {
             childName: obj.sponsor.name,
             mother: obj.femaleGrandparent.name,
             father: obj.maleGrandparent.name,
-            dob: obj.sponsor.birthday
+            dob: obj.sponsor.birthday,
+            relationship: obj.sponsor.relationship
         }
     ]
     obj.birthCertificates = bcs
@@ -2013,33 +2012,58 @@ function renderDemographics(kid) {
         document.createElement('div')
     headerDiv.classList.add('demographics-header')
     headerDiv.appendChild(demographicsDiv)
+    const left = document.createElement('div')
+    const middle = document.createElement('div')
+    const right = document.createElement('div')
     const ulEl = document.createElement('ul')
+    left.append(ulEl)
+    left.classList.add('child-left')
+    const ulElRight = document.createElement('ul')
+    right.append(ulElRight)
+    right.classList.add('child-right')
+    middle.classList.add('child-middle')
+    const ulElMiddle =
+        document.createElement('ul')
+    middle.append(ulElMiddle)
     const fcgUl = document.createElement('ul')
     const mcgUl = document.createElement('ul')
     headerDiv.appendChild(femaleCaregiverDiv)
     headerDiv.appendChild(maleCaregiverDiv)
-    demographicsDiv.classList.add('header-info')
+    demographicsDiv.classList.add(
+        'header-info',
+        'child-info'
+    )
     femaleCaregiverDiv.classList.add(
         'header-info'
     )
     maleCaregiverDiv.classList.add('header-info')
     femaleCaregiverDiv.append(fcgUl)
     maleCaregiverDiv.append(mcgUl)
-    demographicsDiv.append(ulEl)
-    const text = {
+    demographicsDiv.append(left, middle, right)
+    const text1 = {
         "Child's Name": kid.childName,
         DOB: kid.childDob.toLocaleDateString(),
         'A#': kid.a_number,
         Age: getAge(kid.childDob),
         Gender: kid.childGender,
+        'Date of departure from COO':
+            kid.departDate,
+        'Length of Journey': `${kid.journey} days`
+    }
+
+    const text3 = {
         COO: kid.coo,
         City: kid.city.cityName,
         Neighborhood: kid.neighborhood,
-        'Date of departure from COO':
-            kid.departDate,
-        'Length of Journey': `${kid.journey} days`,
+        'Reason for Travel to US':
+            'For a better future and education.',
+        'Port of Entry': 'El Paso, TX',
+        'Date last Attended School/Grade completed':
+            '',
         'Date of Arrival to US': kid.arrivalDate,
-        'Date of Admission': kid.admitDate,
+        'Date of Admission': kid.admitDate
+    }
+    const text2 = {
         Debt: 'None',
         'Reason for Travel to US':
             'For a better future and education.',
@@ -2075,7 +2099,7 @@ function renderDemographics(kid) {
         'Relationship To Child':
             kid.maleCaregiver.relationship
     }
-    for (const child in text) {
+    for (const child in text1) {
         const liEl = document.createElement('li')
         const keyEl =
             document.createElement('strong')
@@ -2083,10 +2107,36 @@ function renderDemographics(kid) {
             document.createElement('p')
 
         keyEl.innerHTML = child
-        valueEl.innerHTML = text[child]
+        valueEl.innerHTML = text1[child]
         liEl.style = 'list-style: none'
         liEl.append(keyEl, ' : ', valueEl)
         ulEl.append(liEl)
+    }
+    for (const child in text2) {
+        const liEl = document.createElement('li')
+        const keyEl =
+            document.createElement('strong')
+        const valueEl =
+            document.createElement('p')
+
+        keyEl.innerHTML = child
+        valueEl.innerHTML = text2[child]
+        liEl.style = 'list-style: none'
+        liEl.append(keyEl, ' : ', valueEl)
+        ulElRight.append(liEl)
+    }
+    for (const child in text3) {
+        const liEl = document.createElement('li')
+        const keyEl =
+            document.createElement('strong')
+        const valueEl =
+            document.createElement('p')
+
+        keyEl.innerHTML = child
+        valueEl.innerHTML = text3[child]
+        liEl.style = 'list-style: none'
+        liEl.append(keyEl, ' : ', valueEl)
+        ulElMiddle.append(liEl)
     }
     for (const child in femaleCaregiver) {
         const liEl = document.createElement('li')
@@ -2587,35 +2637,6 @@ function appGenerated() {
     return app
 }
 function generateTonsOfCases(rounds) {
-    const letters = [
-        'A',
-        'B',
-        'C',
-        'D',
-        'E',
-        'F',
-        'G',
-        'H',
-        'I',
-        'J',
-        'K',
-        'L',
-        'M',
-        'N',
-        'O',
-        'P',
-        'Q',
-        'R',
-        'S',
-        'T',
-        'U',
-        'V',
-        'W',
-        'X',
-        'Y',
-        'Z'
-    ]
-
     const numCases =
         document.getElementById('number')
     const startingA = document.getElementById(

@@ -107,6 +107,10 @@ h4 {
     padding: 1rem;
 }
 
+.demographics-header li {
+    margin: 0;
+}
+
 li {
     margin: 0;
     font-weight: 100;
@@ -288,4 +292,21 @@ li {
 
 .letter-of-designation h3 {
     font-size: 20px;
+}
+.child-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.child-left li {
+    margin: 12px;
+    line-height: 1;
+}
+
+.child-right li {
+    line-height: 1;
+}
+
+.child-middle li {
+    line-height: 1;
 }
