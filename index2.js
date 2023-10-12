@@ -2159,9 +2159,7 @@ function renderDemographics(kid) {
 function completedSchool(data, kid) {
     const today = new Date()
     today.setDate(1)
-    console.log(kid.departDate)
     const depart = new Date(kid.departDate)
-    console.log(depart)
     today.setMonth(depart.getMonth() - 2)
     if (data == 14) {
         return (
@@ -2671,7 +2669,7 @@ function getAge(dob) {
 function appGenerated() {
     const d = Math.floor(Math.random() * 100)
     const app =
-        d > 50 ? 'Generada Desde La App' : ''
+        d > 85 ? 'Generada Desde La App' : ''
     return app
 }
 function generateTonsOfCases(rounds) {

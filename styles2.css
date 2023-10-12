@@ -310,3 +310,7 @@ li {
 .child-middle li {
     line-height: 1;
 }
+
+tr:hover {
+    cursor: pointer;
+}
