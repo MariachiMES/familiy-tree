@@ -1,227 +1,14 @@
 let totalCaseload = []
-const idTypes = [
-    'Foreign Passport',
-    'State Id',
-    'Legal Permanent Resident Card',
-    'United States Passport'
-]
-const genders = ['Male', 'Female']
 
-const maleNames = [
-    'Josue',
-    'Marco',
-    'Jose',
-    'Luis',
-    'Angel',
-    'Ricardo',
-    'Daniel',
-    'David',
-    'Lorenzo',
-    'Ahuitzotl',
-    'Gumencindo',
-    'Jesse',
-    'Miguel',
-    'Carlos',
-    'Eric',
-    'Hachicho',
-    'Douglas',
-    'Jimmithan',
-    'Jonathan',
-    'Ollin',
-    'Omar',
-    'Alejandro',
-    'Paul'
-]
-
-const femaleNames = [
-    'Samantha',
-    'Vanessa',
-    'Ruby',
-    'Marisa',
-    'Deloiza',
-    'Melissa',
-    'Debbie',
-    'Selena',
-    'Joanna',
-    'Amalia',
-    'Cynthia',
-    'Laura',
-    'Alejandra',
-    'Kristina',
-    'Elsa',
-    'Naomi',
-    'Jaqueline',
-    'Venessa',
-    'Inez',
-    'Anita',
-    'Teresa',
-    'Imelda',
-    'Rocketa',
-    'Jana',
-    'Corina',
-    'Christina',
-    'Nina',
-    'Cecilia',
-    'Alison',
-    'Amanda',
-    'Daniela',
-    'Genevieve',
-    'Ina',
-    'Paty',
-    'Aida',
-    'Reyna',
-    'Monica',
-    'Sonja',
-    'Julieta',
-    'Julissa',
-    'Lisa',
-    'Guadalupe',
-    'Norma',
-    'Diamantina',
-    'Tanya',
-    'Sabrina',
-    'Gabriela',
-    'Iris',
-    'Pamela',
-    'Carla',
-    'Clarissa'
-]
-
-const lastNames = [
-    'Hernandez',
-    'Gatica',
-    'Ortiz',
-    'Lopez',
-    'Martinez',
-    'Garcia',
-    'Gomez',
-    'Cavazos',
-    'Zepeda',
-    'Zapata',
-    'Luna',
-    'Medellin',
-    'Moreno',
-    'Lozano',
-    'Cervantes',
-    'Cardenas'
-]
-
-const countriesOfOrigin = [
-    {
-        countryName: 'Guatemala',
-        languages: [
-            'Akateco',
-            'Jakalteco',
-            'Mam',
-            `K'iche`,
-            `Q'eqchi`,
-            'Kaqchikel'
-        ],
-        cities: [
-            {
-                cityName: 'Guatemala',
-                neighborhoods: ['Cayala', 'Mixco']
-            },
-            {
-                cityName: 'Peten',
-                neighborhoods: [
-                    'San Benito',
-                    'San Jose de Los Negros'
-                ]
-            },
-            {
-                cityName: 'Alta Verapaz',
-                neighborhoods: ['Oban', 'Chisec']
-            },
-            {
-                cityName: 'Teculutam',
-                neighborhoods: [
-                    'Zacapa',
-                    'Teochitlan'
-                ]
-            }
-        ]
-    },
-    {
-        countryName: 'El Salvador',
-        languages: ['Espanol'],
-        cities: [
-            {
-                cityName: 'San Miguel',
-                neighborhoods: [
-                    'San Benito',
-                    'Ciudad Vieja'
-                ]
-            },
-            {
-                cityName: 'San Salvador',
-                neighborhoods: [
-                    'Barrio San Esteban',
-                    'Colonia Manzano'
-                ]
-            },
-            {
-                cityName: 'La Union',
-                neighborhoods: [
-                    'San Carlos',
-                    'Acajutla'
-                ]
-            },
-            {
-                cityName: 'Uzultan',
-                neighborhoods: [
-                    'Jiquilisco',
-                    'Alegria'
-                ]
-            }
-        ]
-    },
-
-    {
-        countryName: 'Honduras',
-        languages: ['Espanol'],
-        cities: [
-            {
-                cityName: 'Olancho',
-                neighborhoods: [
-                    'San Francisco De La Paz',
-                    'La Union'
-                ]
-            },
-            {
-                cityName: 'San Pedro Sula',
-                neighborhoods: [
-                    'Colonia Los Cedros',
-                    'Los Castanos'
-                ]
-            },
-            {
-                cityName: 'Yoro',
-                neighborhoods: [
-                    'Arenal Morazan',
-                    'Santa Rita'
-                ]
-            },
-            {
-                cityName: 'La Paz',
-                neighborhoods: [
-                    'San Pedro de Tutule',
-                    'San Juan'
-                ]
-            }
-        ]
-    }
-]
-
-let hobbies = [
-    'playing piano',
-    'studying',
-    'playing cards',
-    'soccer',
-    'baseball',
-    'listening to music',
-    'watching television'
-]
+import {
+    idTypes,
+    genders,
+    maleNames,
+    femaleNames,
+    lastNames,
+    countriesOfOrigin,
+    hobbies
+} from './data.js'
 
 function randomHobbies() {
     let skills = ''
@@ -282,7 +69,7 @@ function randomCountry() {
         Math.random() * countriesOfOrigin.length
     )
     const coo = countriesOfOrigin[randomIdx]
-    childLanguage = randomLanguage(coo)
+    const childLanguage = randomLanguage(coo)
     return [childLanguage, coo]
 }
 
@@ -302,14 +89,6 @@ function randomLanguage(country) {
 
     return spokenLanguage
 }
-
-// function randomLanguage() {
-//   const r = Math.random() *100
-//   const randomIdx = Math.floor(Math.random() * languages.length)
-//   const language =r > 10 ? 'Espanol' : languages[randomIdx]
-//   return language
-
-// }
 
 const familyMembers = document.getElementById(
     'family-members'
@@ -2169,7 +1948,6 @@ function renderToManifest(child) {
     newRow.setAttribute('data-child', child._id)
     tableBodyEl.append(newRow)
     newRow.addEventListener('mouseover', (e) => {
-        console.log('mouseover')
         e.target.parentElement.style.backgroundColor =
             'rgba(0,0,0,0.1'
     })
@@ -2548,7 +2326,248 @@ function renderBirthCertificates(child) {
         bcContainer.append(birthCert)
     })
     scriptHeadEl.append(bcContainer)
+    renderSponsorId(child)
 }
+function renderSponsorId(kid) {
+    const scriptHeadEl = document.getElementById(
+        'script-script'
+    )
+    const sponsorBox =
+        document.createElement('div')
+    const sponsorId =
+        document.createElement('div')
+    sponsorBox.classList.add(
+        'document',
+        'sponsor-id-container'
+    )
+    sponsorId.classList.add('sponsor-id')
+    sponsorId.textContent = kid.sponsor.id_type[0]
+    const idHeader = document.createElement('div')
+    idHeader.classList.add('id-header')
+    idHeader.innerHTML = `<h3>${kid.sponsor.name}</h3>`
+    const idBody = document.createElement('div')
+    const idBodyLeft =
+        document.createElement('div')
+    const idBodyMiddle =
+        document.createElement('div')
+    idBody.classList.add('id-body')
+    idBodyLeft.classList.add('id-body-left')
+    idBodyMiddle.classList.add('id-body-middle')
+    const imageDiv = document.createElement('div')
+    imageDiv.classList.add('contact-card')
+    const contactCard =
+        document.createElement('img')
+    contactCard.src = './IdPlaceholder.png'
+    imageDiv.append(contactCard)
+    idBodyLeft.append(imageDiv)
+    const idFooter = document.createElement('div')
+    idBody.append(idBodyLeft, idBodyMiddle)
+
+    const idMiddleUl =
+        document.createElement('ul')
+    idMiddleUl.innerHTML = `<li><strong>Date of Birth: </strong>${kid.sponsor.birthday.toLocaleDateString()}</li>
+    <li><strong>Date Issued: </strong>${kid.sponsor.id_issued.toLocaleDateString()}</li>
+    <li><strong>Date of Expiry: </strong>${kid.sponsor.id_expires.toLocaleDateString()}</li>`
+    idBodyMiddle.append(idMiddleUl)
+
+    sponsorId.append(idHeader)
+    sponsorId.append(idBody)
+    sponsorBox.append(sponsorId)
+
+    scriptHeadEl.append(sponsorBox)
+
+    if (
+        kid.sponsor.relationship === 'Mother' ||
+        kid.sponsor.relationship === 'Father'
+    ) {
+        renderPublicRecordsCheck(kid)
+    } else {
+        renderProofOfAddress(kid)
+    }
+}
+
+function renderProofOfAddress(child) {
+    const scriptHeadEl = document.getElementById(
+        'script-script'
+    )
+
+    const proofOfAddress =
+        document.createElement('div')
+    proofOfAddress.classList.add('document')
+
+    const poaHeader =
+        document.createElement('div')
+    poaHeader.classList.add('poa-header')
+
+    const poaLeft = document.createElement('div')
+    poaLeft.classList.add('poa-left')
+    poaLeft.innerHTML = `<h1><strong>ABC Utility</strong></h1>`
+    const poaRight = document.createElement('div')
+    poaRight.classList.add('poa-right')
+    poaRight.innerHTML = `<h3><strong>Issue Date: </strong>${getOneMonthDate()}</h3>`
+    const poaBody = document.createElement('div')
+    poaBody.classList.add('poa-body')
+    poaBody.innerHTML = `
+    <ul>
+        <li><h3>${child.sponsor.name}</h3></li>
+        <li><h3>123 Main Street</h3></li>
+        <li><h3>Anytown, USA</h3></li>
+        <li><h3>00000</h3></li>
+    </ul>`
+    poaHeader.append(poaLeft, poaRight)
+    proofOfAddress.append(poaHeader, poaBody)
+
+    scriptHeadEl.append(proofOfAddress)
+    renderPublicRecordsCheck(child)
+}
+function getOneMonthDate() {
+    const today = new Date()
+    today.setDate(1)
+    return today.toLocaleDateString()
+}
+
+function renderPublicRecordsCheck(child) {
+    const checks = [
+        {
+            firstName: child.sponsor.firstName,
+            lastName: `${child.sponsor.fathersFamilyName} ${child.sponsor.mothersFamilyName}`,
+            dateOfBirth:
+                child.sponsor.birthday.toLocaleDateString()
+        },
+        {
+            firstName:
+                child.sponsor.firstName.split(
+                    ' '
+                )[0],
+            lastName:
+                child.sponsor.fathersFamilyName,
+            dateOfBirth:
+                child.sponsor.birthday.toLocaleDateString()
+        },
+        {
+            firstName:
+                child.sponsor.firstName.split(
+                    ' '
+                )[1],
+            lastName:
+                child.sponsor.fathersFamilyName,
+            dateOfBirth:
+                child.sponsor.birthday.toLocaleDateString()
+        },
+        {
+            firstName:
+                child.sponsor.firstName.split(
+                    ' '
+                )[0],
+            lastName:
+                child.sponsor.mothersFamilyName,
+            dateOfBirth:
+                child.sponsor.birthday.toLocaleDateString()
+        },
+        {
+            firstName:
+                child.sponsor.firstName.split(
+                    ' '
+                )[1],
+            lastName:
+                child.sponsor.mothersFamilyName,
+            dateOfBirth:
+                child.sponsor.birthday.toLocaleDateString()
+        },
+        {
+            firstName:
+                child.sponsor.firstName.split(
+                    ' '
+                )[0],
+            lastName: `${child.sponsor.fathersFamilyName} ${child.sponsor.mothersFamilyName}`,
+            dateOfBirth:
+                child.sponsor.birthday.toLocaleDateString()
+        },
+        {
+            firstName:
+                child.sponsor.firstName.split(
+                    ' '
+                )[1],
+            lastName: `${child.sponsor.fathersFamilyName} ${child.sponsor.mothersFamilyName}`,
+            dateOfBirth:
+                child.sponsor.birthday.toLocaleDateString()
+        }
+    ]
+    const today = new Date()
+
+    const scriptHeadEl = document.getElementById(
+        'script-script'
+    )
+
+    const publicRecordsCheck =
+        document.createElement('div')
+    publicRecordsCheck.classList.add(
+        'document',
+        'public-records-check'
+    )
+    const prcTitle = document.createElement('h2')
+    prcTitle.textContent =
+        'Public Records Check ' +
+        today.toLocaleDateString()
+    publicRecordsCheck.append(prcTitle)
+    checks.forEach((check) => {
+        const newCheck =
+            document.createElement('div')
+        newCheck.classList.add('new-check')
+
+        newCheck.innerHTML = `<ul>
+            <li><h3><strong>Name</strong> : ${check.firstName} ${check.lastName}</h3></li>
+            <li><h3><strong>Date of Birth: </strong> ${check.dateOfBirth}</h3></li>
+            <li><h3><strong>Results: </strong> CLEAR</h3></li>
+            </ul>`
+        publicRecordsCheck.append(newCheck)
+    })
+
+    scriptHeadEl.append(publicRecordsCheck)
+    if (
+        child.sponsor.relationship === 'Mother' ||
+        child.sponsor.relationship === 'Father'
+    ) {
+        return
+    }
+    renderLOD(child)
+}
+
+function renderLOD(child) {
+    console.log(child.sponsor.relationship)
+    const scriptHeadEl = document.getElementById(
+        'script-script'
+    )
+    const letterOfDesignation =
+        document.createElement('div')
+
+    letterOfDesignation.classList.add(
+        'document',
+        'letter-of-designation'
+    )
+    const lodTitle = document.createElement('h2')
+    lodTitle.textContent = 'Letter of Designation'
+    const lodBody = document.createElement('div')
+    lodBody.classList.add('lod-body')
+    lodBody.innerHTML = `<h3>
+    <strong>Child's Name: </strong> ${child.childName}
+    </h3>
+    <h3>
+    <strong>Fathers Name: </strong> ${child.father.name}
+    </h3>
+    <h3>
+    <strong>Mother's Name: </strong> ${child.mother.name}
+    </h3>
+    <h3>
+    <strong>Sponsor's Name: </strong> ${child.sponsor.name}
+    </h3>
+    `
+
+    letterOfDesignation.append(lodTitle, lodBody)
+
+    scriptHeadEl.append(letterOfDesignation)
+}
+
 function getAge(dob) {
     var dob = new Date(dob)
     var month_diff = Date.now() - dob.getTime()

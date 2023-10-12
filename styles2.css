@@ -171,3 +171,121 @@ li {
 .inscrito h4 {
     font-size: 16px;
 }
+
+.sponsor-id-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.sponsor-id {
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: skyblue;
+    height: 40vh;
+    width: 60vw;
+}
+.sponsor-id h3 {
+    font-size: 20px;
+}
+
+.id-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 1rem;
+    background-color: rgb(170, 170, 218);
+    border-radius: 20px;
+    padding: 1rem;
+}
+
+.id-body ul {
+    list-style: none;
+}
+
+.id-body-left {
+}
+.contact-card {
+}
+
+.contact-card img {
+    height: 100px;
+}
+
+.id-body-middle {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.id-body-right {
+    background-color: pink;
+}
+
+.image-div {
+}
+
+.poa-header {
+    margin: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 2rem;
+}
+
+.poa-left h1 {
+    font-size: 35px;
+}
+
+.poa-right {
+}
+
+.poa-right h3 {
+    font-size: 25px;
+}
+.poa-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 2rem;
+}
+.poa-body h3 {
+    font-size: 25px;
+}
+.poa-body ul {
+    list-style: none;
+}
+
+.new-check {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem;
+}
+
+.public-records-check {
+    text-align: center;
+    margin: 1rem;
+}
+.new-check h3 {
+    font-size: 20px;
+}
+.new-check ul {
+    display: flex;
+    list-style: none;
+}
+
+.letter-of-designation {
+    text-align: center;
+}
+
+.letter-of-designation h2 {
+    font-size: 25px;
+}
+
+.letter-of-designation h3 {
+    font-size: 20px;
+}
