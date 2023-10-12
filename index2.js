@@ -2059,7 +2059,10 @@ function renderDemographics(kid) {
             'For a better future and education.',
         'Port of Entry': 'El Paso, TX',
         'Date last Attended School/Grade completed':
-            '',
+            completedSchool(
+                getAge(kid.childDob),
+                kid
+            ),
         'Date of Arrival to US': kid.arrivalDate,
         'Date of Admission': kid.admitDate
     }
@@ -2068,8 +2071,6 @@ function renderDemographics(kid) {
         'Reason for Travel to US':
             'For a better future and education.',
         'Port of Entry': 'El Paso, TX',
-        'Date last Attended School/Grade completed':
-            '',
         Hobbies: kid.hobbies,
         'Religious Affiliation': 'Catholic',
         'Primary Language': kid.language
@@ -2153,6 +2154,43 @@ function renderDemographics(kid) {
 
     scriptHeadEl.append(headerDiv)
     renderSponsorInfo(kid)
+}
+
+function completedSchool(data, kid) {
+    const today = new Date()
+    today.setDate(1)
+    console.log(kid.departDate)
+    const depart = new Date(kid.departDate)
+    console.log(depart)
+    today.setMonth(depart.getMonth() - 2)
+    if (data == 14) {
+        return (
+            today.toLocaleDateString() +
+            ' /' +
+            ' 8th Grade'
+        )
+    }
+    if (data == 15) {
+        return (
+            today.toLocaleDateString() +
+            '/' +
+            '9th Grade'
+        )
+    }
+    if (data == 16) {
+        return (
+            today.toLocaleDateString() +
+            '/' +
+            '10th grade'
+        )
+    }
+    if (data == 17) {
+        return (
+            today.toLocaleDateString() +
+            '/' +
+            '11th Grade'
+        )
+    }
 }
 function acgAge(kid) {
     console.log(kid.acg.birthday)
