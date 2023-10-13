@@ -10,6 +10,8 @@ import {
     hobbies
 } from './data.js'
 
+function renderSavedCases(caseload) {}
+
 function randomHobbies() {
     let skills = ''
     for (var i = 0; i < 2; i++) {
@@ -115,6 +117,7 @@ class FamilyMember {
         this.language = language || 'Espanol'
         this.phone = randomPhoneNumber()
         this.birthday = generateBirthday(birthday)
+        this.app_generated = appGenerated()
     }
 }
 
@@ -653,6 +656,7 @@ function getCat1Mother() {
         obj.sponsor.birthday,
         obj.sponsor.id_issued
     )
+    obj.app_generated = child[0].app_generated
     obj.acg = father
     obj.acg.relationship_to_sponsor = 'Spouse'
     obj.maleCaregiver.relationship_to_sponsor =
@@ -662,6 +666,20 @@ function getCat1Mother() {
     obj._id =
         Date.now() +
         Math.floor(Math.random() * 4536281736)
+
+    obj.complications = []
+
+    if (obj.language != 'Espanol') {
+        obj.complications.push('Language')
+    }
+    if (obj.journey > 20) {
+        obj.complications.push('Long Journey')
+    }
+    const today = new Date()
+    const date = new Date(obj.id_expires)
+    if (today > date) {
+        obj.complications.push('Expired ID')
+    }
     const bcs = [
         {
             childName:
@@ -670,16 +688,27 @@ function getCat1Mother() {
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.childDob,
-            relationship: 'Child'
+            relationship: 'Child',
+            generada: obj.app_generated
         },
         {
             childName: obj.mother.name,
             mother: obj.maternalGrandmother.name,
             father: obj.maternalGrandfather.name,
             dob: obj.mother.birthday,
-            relationship: obj.sponsor.relationship
+            relationship:
+                obj.sponsor.relationship,
+            generada: obj.sponsor.app_generated
         }
     ]
+    if (
+        obj.app_generated != '' ||
+        obj.sponsor.app_generated != ''
+    ) {
+        obj.complications.push(
+            'Birth Certificates'
+        )
+    }
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
@@ -741,6 +770,8 @@ function getCat1Father() {
         obj.sponsor.birthday,
         obj.sponsor.id_issued
     )
+    obj.app_generated = child[0].app_generated
+
     obj.acg = mother
     obj.acg.relationship_to_sponsor = 'Spouse'
     obj.maleCaregiver.relationship_to_sponsor =
@@ -750,6 +781,18 @@ function getCat1Father() {
     obj._id =
         Date.now() +
         Math.floor(Math.random() * 226382716)
+    obj.complications = []
+    if (obj.language != 'Espanol') {
+        obj.complications.push('Language')
+    }
+    if (obj.journey > 20) {
+        obj.complications.push('Long Journey')
+    }
+    const today = new Date()
+    const date = new Date(obj.id_expires)
+    if (today > date) {
+        obj.complications.push('Expired ID')
+    }
     const bcs = [
         {
             childName:
@@ -758,16 +801,27 @@ function getCat1Father() {
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.childDob,
-            relationship: 'Child'
+            relationship: 'Child',
+            generada: obj.app_generated
         },
         {
             childName: obj.father.name,
             mother: obj.paternalGrandmother.name,
             father: obj.paternalGrandfather.name,
             dob: obj.father.birthday,
-            relationship: obj.sponsor.relationship
+            relationship:
+                obj.sponsor.relationship,
+            generada: obj.sponsor.app_generated
         }
     ]
+    if (
+        obj.app_generated != '' ||
+        obj.sponsor.app_generated != ''
+    ) {
+        obj.complications.push(
+            'Birth Certificates'
+        )
+    }
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
@@ -796,6 +850,7 @@ function getCat2ASister() {
     let neighborhood = randomPlace(
         coo.cities[idx].neighborhoods
     )
+    obj.app_generated = child[0].app_generated
     obj.admitDate = admit
     obj.departDate = depart
     obj.arrivalDate = arrive
@@ -849,17 +904,40 @@ function getCat2ASister() {
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.childDob,
-            relationship: 'Child'
+            relationship: 'Child',
+            generada: obj.app_generated
         },
         {
             childName: obj.sponsor.name,
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.sponsor.birthday,
-            relationship: obj.sponsor.relationship
+            relationship:
+                obj.sponsor.relationship,
+            generada: obj.sponsor.app_generated
         }
     ]
     obj.birthCertificates = bcs
+    obj.complications = []
+    if (
+        obj.app_generated != '' ||
+        obj.sponsor.app_generated != ''
+    ) {
+        obj.complications.push(
+            'Birth Certificates'
+        )
+    }
+    if (obj.language != 'Espanol') {
+        obj.complications.push('Language')
+    }
+    if (obj.journey > 20) {
+        obj.complications.push('Long Journey')
+    }
+    const today = new Date()
+    const date = new Date(obj.id_expires)
+    if (today > date) {
+        obj.complications.push('Expired ID')
+    }
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -886,6 +964,7 @@ function getCat2ABrother() {
     let neighborhood = randomPlace(
         coo.cities[idx].neighborhoods
     )
+    obj.app_generated = child[0].app_generated
     obj.admitDate = admit
     obj.departDate = depart
     obj.arrivalDate = arrive
@@ -939,19 +1018,44 @@ function getCat2ABrother() {
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.childDob,
-            relationship: 'Child'
+            relationship: 'Child',
+            generada: obj.app_generated
         },
         {
             childName: obj.sponsor.name,
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.sponsor.birthday,
-            relationship: obj.sponsor.relationship
+            relationship:
+                obj.sponsor.relationship,
+            generada: obj.sponsor.app_generated
         }
     ]
     obj.birthCertificates = bcs
+    obj.complications = []
+    obj.generada_desde_la_app = appGenerated()
+    if (
+        obj.app_generated != '' ||
+        obj.sponsor.app_generated != ''
+    ) {
+        obj.complications.push(
+            'Birth Certificates'
+        )
+    }
+    if (obj.language != 'Espanol') {
+        obj.complications.push('Language')
+    }
+    if (obj.journey > 20) {
+        obj.complications.push('Long Journey')
+    }
+    const today = new Date()
+    const date = new Date(obj.id_expires)
+    if (today > date) {
+        obj.complications.push('Expired ID')
+    }
 
     totalCaseload.push(obj)
+
     renderKid(obj)
 }
 
@@ -978,6 +1082,7 @@ function getCat2BMaternalAunt() {
     let neighborhood = randomPlace(
         coo.cities[idx].neighborhoods
     )
+    obj.app_generated = child[0].app_generated
     obj.admitDate = admit
     obj.departDate = depart
     obj.arrivalDate = arrive
@@ -1033,24 +1138,50 @@ function getCat2BMaternalAunt() {
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.childDob,
-            relationship: 'Child'
+            relationship: 'Child',
+            generada: obj.app_generated
         },
         {
             childName: obj.mother.name,
             mother: obj.femaleGrandparent.name,
             father: obj.maleGrandparent.name,
             dob: obj.mother.birthday,
-            relationship: obj.mother.relationship
+            relationship: obj.mother.relationship,
+            generada: obj.mother.app_generated
         },
         {
             childName: obj.sponsor.name,
             mother: obj.femaleGrandparent.name,
             father: obj.maleGrandparent.name,
             dob: obj.sponsor.birthday,
-            relationship: obj.sponsor.relationship
+            relationship:
+                obj.sponsor.relationship,
+            generada: obj.sponsor.app_generated
         }
     ]
     obj.birthCertificates = bcs
+    obj.complications = []
+    obj.generada_desde_la_app = appGenerated()
+    if (
+        obj.app_generated != '' ||
+        obj.sponsor.app_generated != '' ||
+        obj.mother.app_generated != ''
+    ) {
+        obj.complications.push(
+            'Birth Certificates'
+        )
+    }
+    if (obj.language != 'Espanol') {
+        obj.complications.push('Language')
+    }
+    if (obj.journey > 20) {
+        obj.complications.push('Long Journey')
+    }
+    const today = new Date()
+    const date = new Date(obj.id_expires)
+    if (today > date) {
+        obj.complications.push('Expired ID')
+    }
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -1079,6 +1210,7 @@ function getCat2BMaternalUncle() {
     let neighborhood = randomPlace(
         coo.cities[idx].neighborhoods
     )
+    obj.app_generated = child[0].app_generated
     obj.admitDate = admit
     obj.departDate = depart
     obj.arrivalDate = arrive
@@ -1134,24 +1266,50 @@ function getCat2BMaternalUncle() {
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.childDob,
-            relationship: 'Child'
+            relationship: 'Child',
+            generada: obj.app_generated
         },
         {
             childName: obj.mother.name,
             mother: obj.femaleGrandparent.name,
             father: obj.maleGrandparent.name,
             dob: obj.mother.birthday,
-            relationship: obj.mother.relationship
+            relationship: obj.mother.relationship,
+            generada: obj.mother.app_generated
         },
         {
             childName: obj.sponsor.name,
             mother: obj.femaleGrandparent.name,
             father: obj.maleGrandparent.name,
             dob: obj.sponsor.birthday,
-            relationship: obj.sponsor.relationship
+            relationship:
+                obj.sponsor.relationship,
+            generada: obj.sponsor.app_generated
         }
     ]
     obj.birthCertificates = bcs
+    obj.complications = []
+    obj.generada_desde_la_app = appGenerated()
+    if (
+        obj.app_generated != '' ||
+        obj.sponsor.app_generated != '' ||
+        obj.mother.app_generated != ''
+    ) {
+        obj.complications.push(
+            'Birth Certificates'
+        )
+    }
+    if (obj.language != 'Espanol') {
+        obj.complications.push('Language')
+    }
+    if (obj.journey > 20) {
+        obj.complications.push('Long Journey')
+    }
+    const today = new Date()
+    const date = new Date(obj.id_expires)
+    if (today > date) {
+        obj.complications.push('Expired ID')
+    }
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -1180,6 +1338,7 @@ function getCat2BPaternalUncle() {
     let neighborhood = randomPlace(
         coo.cities[idx].neighborhoods
     )
+    obj.app_generated = child[0].app_generated
     obj.admitDate = admit
     obj.departDate = depart
     obj.arrivalDate = arrive
@@ -1235,24 +1394,50 @@ function getCat2BPaternalUncle() {
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.childDob,
-            relationship: 'Child'
+            relationship: 'Child',
+            generada: obj.app_generated
         },
         {
             childName: obj.father.name,
             mother: obj.femaleGrandparent.name,
             father: obj.maleGrandparent.name,
             dob: obj.mother.birthday,
-            relationship: obj.father.relationship
+            relationship: obj.father.relationship,
+            generada: obj.father.app_generated
         },
         {
             childName: obj.sponsor.name,
             mother: obj.femaleGrandparent.name,
             father: obj.maleGrandparent.name,
             dob: obj.sponsor.birthday,
-            relationship: obj.sponsor.relationship
+            relationship:
+                obj.sponsor.relationship,
+            generada: obj.sponsor.app_generated
         }
     ]
     obj.birthCertificates = bcs
+    obj.complications = []
+    obj.generada_desde_la_app = appGenerated()
+    if (
+        obj.app_generated != '' ||
+        obj.sponsor.app_generated != '' ||
+        obj.father.app_generated != ''
+    ) {
+        obj.complications.push(
+            'Birth Certificates'
+        )
+    }
+    if (obj.language != 'Espanol') {
+        obj.complications.push('Language')
+    }
+    if (obj.journey > 20) {
+        obj.complications.push('Long Journey')
+    }
+    const today = new Date()
+    const date = new Date(obj.id_expires)
+    if (today > date) {
+        obj.complications.push('Expired ID')
+    }
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -1281,6 +1466,7 @@ function getCat2BPaternalAunt() {
     let neighborhood = randomPlace(
         coo.cities[idx].neighborhoods
     )
+    obj.app_generated = child[0].app_generated
     obj.admitDate = admit
     obj.departDate = depart
     obj.arrivalDate = arrive
@@ -1336,24 +1522,50 @@ function getCat2BPaternalAunt() {
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.childDob,
-            relationship: 'Child'
+            relationship: 'Child',
+            generada: obj.app_generated
         },
         {
             childName: obj.father.name,
             mother: obj.femaleGrandparent.name,
             father: obj.maleGrandparent.name,
             dob: obj.mother.birthday,
-            relationship: obj.father.relationship
+            relationship: obj.father.relationship,
+            generada: obj.father.app_generated
         },
         {
             childName: obj.sponsor.name,
             mother: obj.femaleGrandparent.name,
             father: obj.maleGrandparent.name,
             dob: obj.sponsor.birthday,
-            relationship: obj.sponsor.relationship
+            relationship:
+                obj.sponsor.relationship,
+            generada: obj.sponsor.app_generated
         }
     ]
     obj.birthCertificates = bcs
+    obj.complications = []
+    obj.generada_desde_la_app = appGenerated()
+    if (
+        obj.app_generated != '' ||
+        obj.sponsor.app_generated != '' ||
+        obj.father.app_generated != ''
+    ) {
+        obj.complications.push(
+            'Birth Certificates'
+        )
+    }
+    if (obj.language != 'Espanol') {
+        obj.complications.push('Language')
+    }
+    if (obj.journey > 20) {
+        obj.complications.push('Long Journey')
+    }
+    const today = new Date()
+    const date = new Date(obj.id_expires)
+    if (today > date) {
+        obj.complications.push('Expired ID')
+    }
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -1384,6 +1596,7 @@ function getCat3greatAunt() {
     let neighborhood = randomPlace(
         coo.cities[idx].neighborhoods
     )
+    obj.app_generated = child[0].app_generated
     obj.admitDate = admit
     obj.departDate = depart
     obj.arrivalDate = arrive
@@ -1443,14 +1656,16 @@ function getCat3greatAunt() {
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.childDob,
-            relationship: 'Child'
+            relationship: 'Child',
+            generada: obj.app_generated
         },
         {
             childName: obj.father.name,
             mother: obj.femaleGrandparent.name,
             father: obj.maleGrandparent.name,
             dob: obj.father.birthday,
-            relationship: obj.father.relationship
+            relationship: obj.father.relationship,
+            generada: obj.father.app_generated
         },
         {
             childName: obj.maleGrandparent.name,
@@ -1459,7 +1674,9 @@ function getCat3greatAunt() {
             father: obj.maleGreatGrandparent.name,
             dob: obj.maleGrandparent.birthday,
             relationship:
-                obj.maleGrandparent.relationship
+                obj.maleGrandparent.relationship,
+            generada:
+                obj.maleGrandparent.app_generated
         },
         {
             childName: obj.sponsor.name,
@@ -1467,10 +1684,35 @@ function getCat3greatAunt() {
                 .name,
             father: obj.maleGreatGrandparent.name,
             dob: obj.sponsor.birthday,
-            relationship: obj.sponsor.relationship
+            relationship:
+                obj.sponsor.relationship,
+            generada: obj.sponsor.app_generated
         }
     ]
     obj.birthCertificates = bcs
+    obj.complications = []
+    obj.generada_desde_la_app = appGenerated()
+    if (
+        obj.app_generated != '' ||
+        obj.sponsor.app_generated != '' ||
+        obj.father.app_generated != '' ||
+        obj.maleGrandparent != ''
+    ) {
+        obj.complications.push(
+            'Birth Certificates'
+        )
+    }
+    if (obj.language != 'Espanol') {
+        obj.complications.push('Language')
+    }
+    if (obj.journey > 20) {
+        obj.complications.push('Long Journey')
+    }
+    const today = new Date()
+    const date = new Date(obj.id_expires)
+    if (today > date) {
+        obj.complications.push('Expired ID')
+    }
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -1501,6 +1743,7 @@ function getCat3greatUncle() {
     let neighborhood = randomPlace(
         coo.cities[idx].neighborhoods
     )
+    obj.app_generated = child[0].app_generated
     obj.admitDate = admit
     obj.departDate = depart
     obj.arrivalDate = arrive
@@ -1560,14 +1803,16 @@ function getCat3greatUncle() {
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.childDob,
-            relationship: 'Child'
+            relationship: 'Child',
+            generada: obj.app_generated
         },
         {
             childName: obj.father.name,
             mother: obj.femaleGrandparent.name,
             father: obj.maleGrandparent.name,
             dob: obj.father.birthday,
-            relationship: obj.father.relationship
+            relationship: obj.father.relationship,
+            generada: obj.father.app_generated
         },
         {
             childName: obj.maleGrandparent.name,
@@ -1576,7 +1821,9 @@ function getCat3greatUncle() {
             father: obj.maleGreatGrandparent.name,
             dob: obj.maleGrandparent.birthday,
             relationship:
-                obj.maleGrandparent.relationship
+                obj.maleGrandparent.relationship,
+            generada:
+                obj.maleGrandparent.app_generated
         },
         {
             childName: obj.sponsor.name,
@@ -1584,10 +1831,35 @@ function getCat3greatUncle() {
                 .name,
             father: obj.maleGreatGrandparent.name,
             dob: obj.sponsor.birthday,
-            relationship: obj.sponsor.relationship
+            relationship:
+                obj.sponsor.relationship,
+            generada: obj.sponsor.app_generated
         }
     ]
     obj.birthCertificates = bcs
+    obj.complications = []
+    obj.generada_desde_la_app = appGenerated()
+    if (
+        obj.app_generated != '' ||
+        obj.sponsor.app_generated != '' ||
+        obj.father.app_generated != '' ||
+        obj.maleGrandparent != ''
+    ) {
+        obj.complications.push(
+            'Birth Certificates'
+        )
+    }
+    if (obj.language != 'Espanol') {
+        obj.complications.push('Language')
+    }
+    if (obj.journey > 20) {
+        obj.complications.push('Long Journey')
+    }
+    const today = new Date()
+    const date = new Date(obj.id_expires)
+    if (today > date) {
+        obj.complications.push('Expired ID')
+    }
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -1614,6 +1886,7 @@ function getCat3unrelatedFemale() {
     let neighborhood = randomPlace(
         coo.cities[idx].neighborhoods
     )
+    obj.app_generated = child[0].app_generated
     obj.admitDate = admit
     obj.departDate = depart
     obj.arrivalDate = arrive
@@ -1667,7 +1940,8 @@ function getCat3unrelatedFemale() {
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.childDob,
-            relationship: 'Child'
+            relationship: 'Child',
+            generada: obj.app_generated
         },
         {
             childName: obj.sponsor.name,
@@ -1682,10 +1956,33 @@ function getCat3unrelatedFemale() {
                 obj.sponsor.fathersFamilyName
             } ${randomLastName()}`,
             dob: obj.sponsor.birthday,
-            relationship: obj.sponsor.relationship
+            relationship:
+                obj.sponsor.relationship,
+            generada: obj.sponsor.app_generated
         }
     ]
     obj.birthCertificates = bcs
+    obj.complications = []
+    obj.generada_desde_la_app = appGenerated()
+    if (
+        obj.app_generated != '' ||
+        obj.sponsor.app_generated != ''
+    ) {
+        obj.complications.push(
+            'Birth Certificates'
+        )
+    }
+    if (obj.language != 'Espanol') {
+        obj.complications.push('Language')
+    }
+    if (obj.journey > 20) {
+        obj.complications.push('Long Journey')
+    }
+    const today = new Date()
+    const date = new Date(obj.id_expires)
+    if (today > date) {
+        obj.complications.push('Expired ID')
+    }
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -1712,6 +2009,7 @@ function getCat3UnrelatedMale() {
     let neighborhood = randomPlace(
         coo.cities[idx].neighborhoods
     )
+    obj.app_generated = child[0].app_generated
     obj.admitDate = admit
     obj.departDate = depart
     obj.arrivalDate = arrive
@@ -1766,7 +2064,8 @@ function getCat3UnrelatedMale() {
             mother: obj.mother.name,
             father: obj.father.name,
             dob: obj.childDob,
-            relationship: 'Child'
+            relationship: 'Child',
+            generada: obj.app_generated
         },
         {
             childName: obj.sponsor.name,
@@ -1781,10 +2080,33 @@ function getCat3UnrelatedMale() {
                 obj.sponsor.fathersFamilyName
             } ${randomLastName()}`,
             dob: obj.sponsor.birthday,
-            relationship: obj.sponsor.relationship
+            relationship:
+                obj.sponsor.relationship,
+            generada: obj.sponsor.app_generated
         }
     ]
     obj.birthCertificates = bcs
+    obj.complications = []
+    obj.generada_desde_la_app = appGenerated()
+    if (
+        obj.app_generated != '' ||
+        obj.sponsor.app_generated != ''
+    ) {
+        obj.complications.push(
+            'Birth Certificates'
+        )
+    }
+    if (obj.language != 'Espanol') {
+        obj.complications.push('Language')
+    }
+    if (obj.journey > 20) {
+        obj.complications.push('Long Journey')
+    }
+    const today = new Date()
+    const date = new Date(obj.id_expires)
+    if (today > date) {
+        obj.complications.push('Expired ID')
+    }
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -2259,8 +2581,6 @@ function renderSponsorInfo(kid) {
     renderBirthCertificates(kid)
 }
 function renderBirthCertificates(child) {
-    child.generada_desda_la_app = appGenerated()
-
     const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)
 
@@ -2397,8 +2717,7 @@ function renderBirthCertificates(child) {
         )
         const generada =
             document.createElement('h4')
-        generada.textContent =
-            child.generada_desda_la_app
+        generada.textContent = bc.generada
         birthCert.classList.add('bc', 'document')
         birthCert.append(
             bcTitle,
@@ -2652,6 +2971,11 @@ function renderLOD(child) {
     letterOfDesignation.append(lodTitle, lodBody)
 
     scriptHeadEl.append(letterOfDesignation)
+    localStorage.removeItem('caseload')
+    localStorage.setItem(
+        'caseload',
+        JSON.stringify(totalCaseload)
+    )
 }
 
 function getAge(dob) {
@@ -2701,6 +3025,7 @@ function generateTonsOfCases(rounds) {
             return
         }
     }
+
     totalCaseload = []
     const table =
         document.getElementById('child-data')
@@ -2713,6 +3038,15 @@ function generateTonsOfCases(rounds) {
         functionObj[i]()
         count++
     }
+    const storedCases =
+        localStorage.getItem('caseload')
+    if (storedCases) {
+        localStorage.removeItem('caseload')
+    }
+    localStorage.setItem(
+        'caseload',
+        JSON.stringify(totalCaseload)
+    )
     console.log(totalCaseload)
 }
 
@@ -2734,4 +3068,14 @@ function showScriptModal() {
 
 function scriptName(aNumber) {
     return `${aNumber}_Mock_Script`
+}
+
+let savedCaseload =
+    localStorage.getItem('caseload')
+if (savedCaseload) {
+    savedCaseload = JSON.parse(savedCaseload)
+    console.log(savedCaseload)
+    savedCaseload.forEach((child) =>
+        console.log(child)
+    )
 }

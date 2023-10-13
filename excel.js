@@ -153,16 +153,7 @@ const toExcel = function (table) {
     const headings =
         [...t_heads]
             .map((head) => {
-                let actual_head = head.textContent
-                    .trim()
-                    .split(' ')
-                return actual_head
-                    .splice(
-                        0,
-                        actual_head.length - 1
-                    )
-                    .join(' ')
-                    .toLowerCase()
+                return head.textContent
             })
             .join('\t') + '\t'
 
