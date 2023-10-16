@@ -335,7 +335,7 @@ function createFamily() {
         'Maternal Grandmother',
         '2A',
         null,
-        45
+        70
     )
 
     const maternalGrandfather = new FamilyMember(
@@ -346,7 +346,7 @@ function createFamily() {
         'Maternal Grandfather',
         '2A',
         null,
-        68
+        70
     )
 
     const maternalAunt = new FamilyMember(
@@ -378,7 +378,7 @@ function createFamily() {
         'Paternal Grandfather',
         '2B',
         null,
-        68
+        70
     )
 
     const paternalGrandmother = new FamilyMember(
@@ -389,7 +389,7 @@ function createFamily() {
         'Paternal Grandmother',
         '2B',
         null,
-        68
+        70
     )
 
     const paternalGreatUncle = new FamilyMember(
@@ -400,7 +400,7 @@ function createFamily() {
         'Paternal Great Uncle',
         '3',
         null,
-        68
+        65
     )
     const paternalGreatAunt = new FamilyMember(
         randomFirstNames('Female'),
@@ -410,7 +410,7 @@ function createFamily() {
         'Paternal Great Aunt',
         '3',
         null,
-        68
+        65
     )
     const femaleGreatGrandparent =
         new FamilyMember(
@@ -642,8 +642,8 @@ function getCat1Mother() {
     obj.sponsor = mother
     obj.mother = mother
     obj.father = father
-    obj.femaleCaregiver = maternalGrandfather
-    obj.maleCaregiver = maternalGrandmother
+    obj.femaleCaregiver = maternalGrandmother
+    obj.maleCaregiver = maternalGrandfather
     obj.maternalGrandfather = maternalGrandfather
     obj.maternalGrandmother = maternalGrandmother
     obj.hobbies = randomHobbies()
@@ -2167,59 +2167,6 @@ function renderCases(child, idx) {
     )
     familyRows.append(tableRow)
 }
-
-// function renderDemographics(kid) {
-//   const bodyEl = document.getElementById("body");
-//   const container = document.createElement("div");
-//   container.classList.add("demographics-container", "document");
-//   const nameDemographic = document.createElement("div");
-//   const dobDemographic = document.createElement("div");
-//   const aNumberDemographic = document.createElement("div");
-//   const cooDemographic = document.createElement("div");
-//   const demographics = document.createElement("div");
-//   const header = document.createElement("div");
-//   header.classList.add("demographic-header");
-
-//   nameDemographic.append(header);
-//   nameDemographic.innerText = `Child's Name`;
-//   demographics.append(
-//     nameDemographic,
-//     dobDemographic,
-//     aNumberDemographic,
-//     cooDemographic,
-//   );
-
-//   const containerClass = "demographics-container";
-//   const headerClass = "demographic-header";
-//   demographics.innerHTML = `<div class="demographic-info">
-// <div class = ${headerClass}>Child Name:</div>
-// <div id = "demographic-name">${kid.childName}</div>
-//    </div>
-// <div class="demographic-info">
-// <div class = ${headerClass}>A#</div>
-// </div>
-// <div class="demographic-info">
-// <div class = ${headerClass}>DOB:</div>
-// <div id="demographic-dob">${kid.childDob.toLocaleDateString()}</div>
-// </div>
-// <div class="demographic-info">
-// <div class = ${headerClass}>COO:</div>
-// <div id="demographic-coo">${`Country of Origin: ${kid.coo} City: ${kid.city.cityName} Neighborhood: ${kid.neighborhood}`}</div>
-// </div>`;
-//   container.append(demographics);
-//   bodyEl.prepend(container);
-// }
-
-// const cat1 = getCat1Mother();
-// const cat1Dad = getCat1Father();
-// const cat2ASister = getCat2ASister();
-// const cat2ABrother = getCat2ABrother();
-// const cat2BMaternalAunt = getCat2BMaternalAunt();
-// const cat2BMaternalUncle = getCat2BMaternalUncle();
-// const cat3greatAunt = getCat3greatAunt();
-// const cat3greatUncle = getCat3greatUncle();
-// const cat3unrelatedFemale = getCat3unrelatedFemale();
-// const cat3unrelatedMale = getCat3UnrelatedMale();
 
 const functionObj = [
     getCat1Mother,
