@@ -2190,9 +2190,13 @@ const functionObj = [
 const excelBtn = document.getElementById(
     'table-to-excel'
 )
+const heading = document.getElementById(
+    'instructions'
+)
 
 function renderToManifest(child) {
     excelBtn.classList.remove('hide')
+    heading.classList.remove('hide')
     let aNumber = document.getElementById(
         'starting-a-number'
     )
