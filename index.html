@@ -1,390 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./normalize.css" />
+    <link rel="stylesheet" href="./skeleton.css" />
+    <link rel="stylesheet" href="./styles2.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Family Tree</title>
-  </head>
-  <body>
-    <div class="child-identity document">
-      <div class="top-row">
-        <div class="child-name">
-          Child Name: <span id="identity-name"></span>
-        </div>
-        <div class="a-number">A# <span id="a-number"></span></div>
-        <div class="age">DOB: <span id="identity-dob"></span></div>
-        <div class="gender">Gender: <span id="identity-gender"></span></div>
-        <div class="coo">
-          COO/City/Neighorhood:
-          <ul>
-            <li>COO:Guatemala</li>
-            <li>City: <spa id = 'demographic-city'></span></li>
-            <li>Neighborhood: XXX</li>
-          </ul>
-        </div>
-      </div>
-      <h2>Family In COO</h2>
-      <div class="caregiver">
-        <ul>
-          <li>Name: <span id="primary-caregiver-1"></span></li>
-          <li>DOB: <span id="primary-caregiver-1-dob"></span></li>
-          <li>PhoneNumber: <span id="phone-1"></span></li>
-          <li>
-            Address:
-            <span
-              class="caregiver-address"
-              id="primary-caregiver-address-1"
-            ></span
-            >, Guatemala
-          </li>
-          <li>
-            Relationship to Sponsor:
-            <span id="caregiver-1-relationship-to-sponsor">Sister</span>
-          </li>
-          <li>
-            Relationship to Child:
-            <span id="caregiver-1-relationship-to-child">Mother</span>
-          </li>
-        </ul>
-      </div>
-      <div class="caregiver">
-        <ul>
-          <li>Name: <span id="primary-caregiver-2"></span></li>
-          <li>DOB: <span id="primary-caregiver-2-dob"></span></li>
-          <li>PhoneNumber: <span id="phone-2"></span></li>
-          <li>
-            Address:
-            <span
-              class="caregiver-address"
-              id="primary-caregiver-address-2"
-            ></span
-            >, Guatemala
-          </li>
-          <li>
-            Relationship to Sponsor:
-            <span id="caregiver-2-relationship-to-sponsor">Brother-In-Law</span>
-          </li>
-          <li>
-            Relationship to Child:
-            <span id="caregiver-2-relationship-to-child">Father</span>
-          </li>
-        </ul>
-      </div>
-	  <div class="child-journey">
 
-		<h2>Child's Journey</h2>
-		<ul>
-		  <li>Date Child Left COO: <span id='date-child-left'></span></li>
-		  <li>Length of Journey: 15 days</li>
-		  <li>Date of Arrival : <span id = 'doa'></span>
-		  </li>
-		  <li>Traveled By: Train, Bus, Foot</li>
-		  <li>Debt: N/A</li>
-		  <li>Reason for Travel: Better Future and Education</li>
-		  <li>Port of Entry: El Paso, TX</li>
-		  <li>Last Attended School: <span id='last-school-date'></span></li>
-		  <li>Hobbies: Reading, Helping aroudn the house</li>
-		  <li>Religious Affiliation: Catholic</li>
-		  <li>Primary Language: Spanish</li>
-		</ul>
-	  </div>
+
+
+    <title>Mock Case Generator</title>
+  </head>
+  <body id="body">
+      <form class="document form">
+        <div class="row">
+          <div >
+            <label for="numberOfCases">How many cases would you like to generate?</label>
+            <input
+              class="u-half-width"
+              placeholder="Number of Cases"
+              id="number"
+
+            />
+            <label for ='starting'>Starting A-Number</label>
+            <input type="u-half-width"
+            placeholder="A#"
+            id = 'starting-a-number'
+
+            >
+
+
+          </div>
+         
+        <input id = 'manifest-button' class="button-primary" type="submit" value="Generate" />
+        <br/>
+        <button class = 'hide' type = 'button' id = 'table-to-excel'>Export Manifest to Excel </button>
+        <h5 class="hide"  id = 'instructions'>Click any name and print to Adobe PDF</h5>
+      </form>
+<div class="table-container no-print">
+  <table id="table" data-table = '1'>
+    <thead></thead>
+    <tbody id="family-rows no-print"></tbody>
+  </table>
+  <table class="u-full-width " id="manifest">
+    <thead>
+      <tr>
+        <th>A-Number</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>DOB</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>COO</th>
+        <th>Health</th>
+        <th>Apprehension</th>
+        <th>Contact</th>
+        <th>Category</th>
+      </tr>
+    </thead>
+    <tbody id="child-data">
+      <tr></tr>
+    </tbody>
+  </table>
+</div>
+<button class = 'hide'type = 'button' id ='to-json'>JSON</button>
+<button class = 'hide'type = 'button ' id ='to-csv'>CSV</button>
+<button class = 'hide' type = 'button' id = 'to-pdf'>PDF</button>
+<script src = './excel.js'>  
+
+  </script>
+    </div>
+    <div id = 'script' class="script">
+      <div id = 'script-body' class="script-body">
+       <div id = 'script-head' class="close">
+        <input type="button"  id = "close-script" class = 'button close-script no-print' value= 'close script'>
+       </div> 
+      </div>
+      <div id="script-script"></div>
       
     </div>
-	<h2>Sponsor Information</h2>
-	<div class="sponsor-info document">
-		
-		<div class="sponsor-info-left">
-			<div class="sponsor-info-name"><h3><span id = "info-name"></span></h3></div>
-			<div class="sponsor-dob"><h3><span id ="info-dob"></span></h3></div>
-			<div class="relationship"><h3><span id = 'info-relationship'></span></h3></div>
-			<div class="face-to-face"><h3><span id="info-face"></span></h3></div>
-			<div class="phone-info"><h3><span id="info-phone"></span></h3></div>
-			<div class="address-info-tab"><h3><span id="info-address"></span></h3></div>
-		</div>
-		<div class="sponso-info-middle">
-
-		</div>
-		<div class="sponsor-info-right"></div>
-	</div>
-    <!--CHILDS BIRTH CERTIFICATE-->
-    <div class="birth-certificate document">
-      <div class="certificate-border">
-        <div class="header">
-          <h2>Registro Nacional de las Personas</h2>
-          <h4>Republica de Guatemala</h4>
-          <h3>Registro Civil de las Personas</h3>
-          <h3>Certificado de Nacimiento</h3>
-        </div>
-        <div class="info-header">
-          <h3>
-            El infrascrito Rigistrador Civil de las Personas del Rigistro
-            Nacional de las Personas del Municipio de Guatemala, Departamento de
-            Guatemala,
-          </h3>
-          <h3>CERTIFICA</h3>
-          <h3>
-            que con fecha <span id="document-date">XXXXX</span> en la partida
-            AAA, folio BB del libro ZZZ del Registro Civil del Municipio de
-            Guatemala, Departamento de Guatemala, quedo inscrito el nacimiento
-            de:
-          </h3>
-        </div>
-        <div class="birth-certificate-body">
-          <h3 class="datos"><strong>Datos del inscrito</strong></h3>
-          <h4><span id="child-name"></span></h4>
-          <hr />
-          <h4 id="child-birth-date">XX/XX/XXXX</h4>
-          <hr />
-          <h4><span id ='child-birthplace'></span>, Guatemala, Guatemala Hospital</h4>
-          <hr />
-          <h3 class="datos"><strong>Datos de la madre</strong></h3>
-          <hr />
-          <h4><span id="child-mother-name"></span></h4>
-          <hr />
-          <h3 class="datos"><strong>Datos del padre</strong></h3>
-          <hr />
-          <h4><span id="child-father-name"></span></h4>
-          <hr />
-        </div>
-      </div>
-    </div>
-    <!--MOTHERS BIRTH CERTIFICATE-->
-    <div class="birth-certificate document">
-      <div class="certificate-border">
-        <div class="header">
-          <h2>Registro Nacional de las Personas</h2>
-          <h4>Republica de Guatemala</h4>
-          <h3>Registro Civil de las Personas</h3>
-          <h3>Certificado de Nacimiento</h3>
-        </div>
-        <div class="info-header">
-          <h3>
-            EL infrascrito Rigistrador Civil de las Personas del Rigistro
-            Nacional de las Personas del Municipio de Guatemala, Departamento de
-            Guatemala,
-          </h3>
-          <h3>CERTIFICA</h3>
-          <h3>
-            que con fecha <span class="dob">XXXXX</span> en la partida AAA,
-            folio BB del libro ZZZ del Registro Civil del Municipio de
-            Guatemala, Departamento de Guatemala, quedo inscrito el nacimiento
-            de:
-          </h3>
-        </div>
-        <div class="birth-certificate-body">
-          <h3 class="datos"><strong>Datos del inscrito</strong></h3>
-          <h4><span id="child-mother-name-bc"></span></h4>
-          <hr />
-          <h4 id="mother-birth-date-bc"></h4>
-          <hr />
-          <h4><span id ='mother-birthplace'></span>, Guatemala, Guatemala Hospital</h4>
-          <hr />
-          <h3 class="datos"><strong>Datos de la madre</strong></h3>
-          <hr />
-          <h4><span id="mother-mother-name"></span></h4>
-          <hr />
-          <h3 class="datos"><strong>Datos del padre</strong></h3>
-          <hr />
-          <h4><span id="mother-father-name-bc"></span></h4>
-          <hr />
-        </div>
-      </div>
-    </div>
-
-	<!--AUNTS BIRTH CERTIFICATE-->
-
-	<div class="birth-certificate document">
-		<div class="certificate-border">
-		  <div class="header">
-			<h2>Registro Nacional de las Personas</h2>
-			<h4>Republica de Guatemala</h4>
-			<h3>Registro Civil de las Personas</h3>
-			<h3>Certificado de Nacimiento</h3>
-		  </div>
-		  <div class="info-header">
-			<h3>
-			  EL infrascrito Rigistrador Civil de las Personas del Rigistro
-			  Nacional de las Personas del Municipio de Guatemala, Departamento de
-			  Guatemala,
-			</h3>
-			<h3>CERTIFICA</h3>
-			<h3>
-			  que con fecha <span class="dob">XXXXX</span> en la partida AAA,
-			  folio BB del libro ZZZ del Registro Civil del Municipio de
-			  Guatemala, Departamento de Guatemala, quedo inscrito el nacimiento
-			  de:
-			</h3>
-		  </div>
-		  <div class="birth-certificate-body">
-			<h3 class="datos"><strong>Datos del inscrito</strong></h3>
-			<h4><span id="sponsor-name-bc"></span></h4>
-			<hr />
-			<h4 id="sponsor-birthday-bc"></h4>
-			<hr />
-			<h4><span id ='sponsor-birthplace'></span>, Guatemala, Guatemala Hospital</h4>
-			<hr />
-			<h3 class="datos"><strong>Datos de la madre</strong></h3>
-			<hr />
-			<h4><span id="sponsor-mother-name-bc"></span></h4>
-			<hr />
-			<h3 class="datos"><strong>Datos del padre</strong></h3>
-			<hr />
-			<h4><span id="sponsor-father-name-bc"></span></h4>
-			<hr />
-		  </div>
-		</div>
-	  </div>
-	  <div class="passport-container document">
-		<div class="passport">
-		  <div class="passport-top">
-			<aside class="id-number">
-			  A323983
-			</aside>
-		  </div>
-	  
-		  <div class="passport-bottom">
-			<div class="passport-header">
-			  &#8212;&#8212;&#8212;INTERNATIONAL PASSPORT &#8212;&#8212;&#8212;
-			  <hr>
-			</div>
-			<div class="passport-body">
-			  <aside class="picture">
-				<img id="contact" src="../assets/images/idpic.png" />
-			  </aside>
-			  <div class="demographics-middle">
-				<div class="left">
-				  <ul>
-					<li>Name:</li>
-					<li>DOB:</li>
-					<li>Country:</li>
-					<li>Issued:</li>
-					<li>Expires:</li>
-	  
-				  </ul>
-				</div>
-				<div class="right">
-				  <ul>
-					<li id="id-name"></li>
-					<li id='id-dob'></li>
-					<li id="id-coo"></li>
-					<li id ='id-issue-date'></li>
-					<li id ='id-expiration-date'></li>
-				  </ul>
-				</div>
-			  </div>
-			</div>
-	  
-	  
-			<div class="passport-footer">
-			  &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; A323983 &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
-			</div>
-		  </div>
-		</div>
-
-	  </div>
-
-	  <div class="utility-bill-container document">
-		<div class="utility-bill">
-		  <div class="utility-header">
-			<div class="header-left" id="logo">ABC Utility
-			</div>
-			<div class="header-right">
-			  <ul>
-				<li>Billing Date: <span id = 'billing-date'></span></li>
-				<li>Account Number: 548354</li>
-			  </ul>
-			</div>
-		  </div>
-		  <div class="utility-body">
-			<div class="body-left">
-			  <ul>
-				<li>
-				  <h2>Name</h2>
-				</li>
-				<li>
-				  <h4 id = "utility-name"></h4>
-				</li>
-				<li>
-				  <h2>Address</h2>
-				</li>
-				<li>
-				  <h4>123 Anywhere St. USA 23423</h4>
-				</li>
-				<li>
-				  <h4>AddressInfo</h4>
-				</li>
-	  
-			  </ul>
-			</div>
-			<div class="body-right">
-			  <ul>
-				<li>
-				  <h2>Amount</h2>
-				</li>
-				<li>
-				  <h4>$132.00</h4>
-				</li>
-	  
-			</div>
-		  </div>
-		  <div class="utility-footer">
-	  
-		  </div>
-		</div>
-	  </div>
-	  <div class="background-check document">
-		<section class="hero criminal-hero">
-		  <div class="hero-body">
-			<p class="title">
-			  National Background Check
-			</p>
-			<p class="subtitle" id="bg-check-date">
-	  
-			</p>
-		  </div>
-		</section>
-		<div class="table-container">
-		  <table class="table">
-			<thead>
-			  <tr>
-				<th>Name</th>
-				<th>DOB</th>
-				<th>Gender</th>
-				<th>Felony Matches</th>
-				<th>Misdemeanor Matches</th>
-			  </tr>
-			</thead>
-			<tbody>
-			  <tr>
-				<td id= 'bg-check-name'></td>
-				<td id = 'bg-check-dob'></td>
-				<td>Male</td>
-				<td>0</td>
-				<td>0</td>
-			  </tr>
-			</tbody>
-		  </table>
-		</div>
-		<p class="subtitle">RESULTS CLEAR</p>
-	  </div>
-	  <style>
-		.background-check {
-		  display: flex;
-		  flex-direction: column;
-	  
-		}
-	  
-		.criminal-hero {
-		  margin-bottom: 20px;
-		  box-shadow: none;
-		}
-	  </style>
-	  <script>
-		const dateEl = document.getElementById("bg-check-date")
-		const today = new Date().toLocaleDateString()
-		dateEl.innerHTML = today
-	  </script>
   </body>
-  <script src="./index.js"></script>
+  <script type = 'module' src="./index2.js" defer></script>
+
+
 </html>

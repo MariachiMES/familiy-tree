@@ -1,0 +1,46 @@
+:root {
+	--darkBackground: rgb(78, 82, 111);
+	--buttonColor: rgb(168, 214, 249);
+	--excelButton: rgb(0, 255, 0);
+	--excelDisabled: rgba(0, 255, 0, 0.3);
+	--formBorder: rgb(106, 94, 136);
+	--darkText: rgb(0, 0, 0);
+	--lightText: rgb(255, 255, 255);
+}
+* {
+	padding: 0;
+	margin: 0;
+	font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+	color: var(--lightText);
+	background-color: var(--darkBackground);
+}
+
+a,
+a:visited,
+a:active {
+	text-decoration: none;
+}
+
+.card {
+	border: 1px solid var(--formBorder);
+	color: var(--lightText);
+}
+
+.generate-btn {
+	color: rgb(151, 215, 255);
+	border: 1px solid var(--buttonColor);
+}
+
+.generate-btn:hover {
+	color: var(--lightText);
+}
+
+.excel-btn {
+	color: rgb(0, 255, 8);
+	border: 1px solid var(--excelButton);
+}
+
+.excel-btn:disabled {
+	color: rgb(0, 100, 0);
+	border: 1px solid var(--excelDisabled);
+}

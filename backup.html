@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link
+            rel="stylesheet"
+            href="./normalize.css"
+        />
+        <link
+            rel="stylesheet"
+            href="./skeleton.css"
+        />
+        <link
+            rel="stylesheet"
+            href="./styles2.css"
+        />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+        />
+        <link
+            rel="stylesheet"
+            href="./style.css"
+        />
+
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+
+        <title>Family Tree</title>
+    </head>
+    <body id="body">
+        <nav></nav>
+        <main>
+            <section
+                class="d-flex justify-content-center align-items-center"
+            >
+                <div class="card w-25 mt-5">
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label
+                                    for="number"
+                                    class="form-label"
+                                    >Number of
+                                    Cases</label
+                                >
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="number"
+                                    aria-describedby="numberOfCasesHelp"
+                                />
+                                <div
+                                    id="numberOfCasesHelp"
+                                >
+                                    Enter the
+                                    number of
+                                    cases you want
+                                    to generate.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label
+                                    for="starting-a-number"
+                                    class="form-label"
+                                    >Starting
+                                    A#</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="starting-a-number"
+                                />
+                                <div
+                                    id="aNumberHelp"
+                                >
+                                    Enter the
+                                    starting A
+                                    Number.
+                                </div>
+                            </div>
+                            <div
+                                class="d-flex justify-content-around"
+                            >
+                                <button
+                                    type="button"
+                                    class="btn generate-btn"
+                                    id="manifest-button"
+                                    type="submit"
+                                >
+                                    Generate Cases
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn excel-btn"
+                                    disabled
+                                    id="table-to-excel"
+                                >
+                                    Export To
+                                    Excel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <div class="table-container no-print">
+                <table id="table" data-table="1">
+                    <thead></thead>
+                    <tbody
+                        id="family-rows no-print"
+                    ></tbody>
+                </table>
+                <table
+                    class="u-full-width"
+                    id="manifest"
+                >
+                    <thead>
+                        <tr>
+                            <th>A-Number</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>DOB</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>COO</th>
+                            <th>Health</th>
+                            <th>Apprehension</th>
+                            <th>Contact</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+                    <tbody id="child-data">
+                        <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+            <button
+                class="hide"
+                type="button"
+                id="to-json"
+            >
+                JSON
+            </button>
+            <button
+                class="hide"
+                type="button "
+                id="to-csv"
+            >
+                CSV
+            </button>
+            <button
+                class="hide"
+                type="button"
+                id="to-pdf"
+            >
+                PDF
+            </button>
+            <script src="./excel.js"></script>
+
+            <div id="script" class="script">
+                <div
+                    id="script-body"
+                    class="script-body"
+                >
+                    <div
+                        id="script-head"
+                        class="close"
+                    >
+                        <input
+                            type="button"
+                            id="close-script"
+                            class="button close-script no-print"
+                            value="close script"
+                        />
+                    </div>
+                </div>
+                <div id="script-script"></div>
+            </div>
+        </main>
+    </body>
+    <script
+        type="module"
+        src="./index2.js"
+        defer
+    ></script>
+</html>
