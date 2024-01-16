@@ -7,7 +7,8 @@ import {
     femaleNames,
     lastNames,
     countriesOfOrigin,
-    hobbies
+    hobbies,
+    narratives
 } from './data.js'
 
 function renderSavedCases(caseload) {}
@@ -535,7 +536,7 @@ function createFamily() {
         randomLastName(),
         randomLastName(),
         'Male',
-        'Unrelated',
+        'Unrelated Male',
         '',
         null,
         30
@@ -546,7 +547,7 @@ function createFamily() {
         cat3MaleSpouse.fathersFamilyName,
         randomLastName(),
         'Female',
-        'Unrelated Sponsor',
+        'Unrelated Female',
         '3',
         null,
         30
@@ -557,7 +558,7 @@ function createFamily() {
         randomLastName(),
         randomLastName(),
         'Male',
-        'Unrelated Sponsor',
+        'Unrelated Male',
         '3',
         null,
         30
@@ -607,6 +608,35 @@ function createFamily() {
 
     return everyone
 }
+
+function getSponsorNarrative(child) {
+    console.log()
+    const randomIdx = Math.floor(
+        Math.random() *
+            narratives[child.sponsor.category][
+                child.sponsor.relationship
+            ].narrative.sponsor.length
+    )
+    return narratives[child.sponsor.category][
+        child.sponsor.relationship
+    ].narrative.sponsor[randomIdx]
+}
+
+function getChildNarrative(child) {
+    const randomIdx = Math.floor(
+        Math.random() *
+            narratives[child.sponsor.category][
+                child.sponsor.relationship
+            ].narrative.child[child.childGender]
+                .length
+    )
+    return narratives[child.sponsor.category][
+        child.sponsor.relationship
+    ].narrative.child[child.childGender][
+        randomIdx
+    ]
+}
+
 function getCat1Mother() {
     const [admit, depart, arrive, j] =
         generateJourneyTime()
@@ -663,6 +693,7 @@ function getCat1Mother() {
         obj.sponsor.birthday,
         obj.sponsor.id_issued
     )
+
     obj.app_generated = child[0].app_generated
     obj.acg = father
     obj.acg.relationship_to_sponsor = 'Spouse'
@@ -716,6 +747,9 @@ function getCat1Mother() {
             'Birth Certificates'
         )
     }
+    obj.sponsorNarrative =
+        getSponsorNarrative(obj)
+    obj.childNarrative = getChildNarrative(obj)
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
@@ -830,6 +864,9 @@ function getCat1Father() {
             'Birth Certificates'
         )
     }
+    obj.sponsorNarrative =
+        getSponsorNarrative(obj)
+    obj.childNarrative = getChildNarrative(obj)
     obj.birthCertificates = bcs
 
     totalCaseload.push(obj)
@@ -947,6 +984,9 @@ function getCat2ASister() {
     if (today > date) {
         obj.complications.push('Expired ID')
     }
+    obj.sponsorNarrative =
+        getSponsorNarrative(obj)
+    obj.childNarrative = getChildNarrative(obj)
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -1063,6 +1103,9 @@ function getCat2ABrother() {
     if (today > date) {
         obj.complications.push('Expired ID')
     }
+    obj.sponsorNarrative =
+        getSponsorNarrative(obj)
+    obj.childNarrative = getChildNarrative(obj)
 
     totalCaseload.push(obj)
 
@@ -1193,6 +1236,9 @@ function getCat2BMaternalAunt() {
     if (today > date) {
         obj.complications.push('Expired ID')
     }
+    obj.sponsorNarrative =
+        getSponsorNarrative(obj)
+    obj.childNarrative = getChildNarrative(obj)
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -1322,6 +1368,9 @@ function getCat2BMaternalUncle() {
     if (today > date) {
         obj.complications.push('Expired ID')
     }
+    obj.sponsorNarrative =
+        getSponsorNarrative(obj)
+    obj.childNarrative = getChildNarrative(obj)
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -1451,6 +1500,9 @@ function getCat2BPaternalUncle() {
     if (today > date) {
         obj.complications.push('Expired ID')
     }
+    obj.sponsorNarrative =
+        getSponsorNarrative(obj)
+    obj.childNarrative = getChildNarrative(obj)
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -1580,6 +1632,9 @@ function getCat2BPaternalAunt() {
     if (today > date) {
         obj.complications.push('Expired ID')
     }
+    obj.sponsorNarrative =
+        getSponsorNarrative(obj)
+    obj.childNarrative = getChildNarrative(obj)
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -1728,6 +1783,9 @@ function getCat3greatAunt() {
     if (today > date) {
         obj.complications.push('Expired ID')
     }
+    obj.sponsorNarrative =
+        getSponsorNarrative(obj)
+    obj.childNarrative = getChildNarrative(obj)
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -1876,6 +1934,9 @@ function getCat3greatUncle() {
     if (today > date) {
         obj.complications.push('Expired ID')
     }
+    obj.sponsorNarrative =
+        getSponsorNarrative(obj)
+    obj.childNarrative = getChildNarrative(obj)
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -2000,6 +2061,9 @@ function getCat3unrelatedFemale() {
     if (today > date) {
         obj.complications.push('Expired ID')
     }
+    obj.sponsorNarrative =
+        getSponsorNarrative(obj)
+    obj.childNarrative = getChildNarrative(obj)
 
     totalCaseload.push(obj)
     renderKid(obj)
@@ -2125,7 +2189,9 @@ function getCat3UnrelatedMale() {
     if (today > date) {
         obj.complications.push('Expired ID')
     }
-
+    obj.sponsorNarrative =
+        getSponsorNarrative(obj)
+    obj.childNarrative = getChildNarrative(obj)
     totalCaseload.push(obj)
     renderKid(obj)
 }
@@ -2331,6 +2397,21 @@ function renderDemographics(kid) {
     femaleCaregiverDiv.append(fcgUl)
     maleCaregiverDiv.append(mcgUl)
     demographicsDiv.append(left, middle, right)
+    const childNarratives = {
+        sponsor: kid.sponsorNarrative,
+        child: kid.childNarrative
+    }
+    const narrativesEl =
+        document.createElement('div')
+
+    const childNarrativeEl =
+        document.createElement('div')
+    childNarrativeEl.innerHTML = `<p>Child Narrative: ${childNarratives.child}</p>`
+    narrativesEl.append(childNarrativeEl)
+    const sponsorNarrativeEl =
+        document.createElement('div')
+    sponsorNarrativeEl.innerHTML = `<p> Sponsor Narrative: ${childNarratives.sponsor}`
+    narrativesEl.append(sponsorNarrativeEl)
     const text1 = {
         "Child's Name": kid.childName,
         DOB: kid.childDob.toLocaleDateString(),
@@ -2444,6 +2525,7 @@ function renderDemographics(kid) {
     }
 
     scriptHeadEl.append(headerDiv)
+    scriptHeadEl.append(narrativesEl)
     renderSponsorInfo(kid)
 }
 
