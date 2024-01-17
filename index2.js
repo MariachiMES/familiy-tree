@@ -623,6 +623,11 @@ function getSponsorNarrative(child) {
 }
 
 function getChildNarrative(child) {
+    console.log(
+        narratives[child.sponsor.category][
+            child.sponsor.relationship
+        ].narrative.child[child.childGender]
+    )
     const randomIdx = Math.floor(
         Math.random() *
             narratives[child.sponsor.category][
