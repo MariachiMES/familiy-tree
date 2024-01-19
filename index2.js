@@ -2539,6 +2539,13 @@ function completedSchool(data, kid) {
     today.setDate(1)
     const depart = new Date(kid.departDate)
     today.setMonth(depart.getMonth() - 2)
+    if (data == 13) {
+        return (
+            today.toLocaleDateString() +
+            ' /' +
+            ' 7th Grade'
+        )
+    }
     if (data == 14) {
         return (
             today.toLocaleDateString() +
